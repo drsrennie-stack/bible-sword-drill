@@ -125,3 +125,10 @@ Not tested: a real phone, Safari or Firefox, a screen reader, the theme music an
 - Multiple choice shows the answers as buttons labeled A to D in a shuffled order. They are reached with Tab and chosen with Enter or Space, the same as in Vital Strike. Feedback names the correct answer and the player's answer in text.
 - Contrast: white on navy for the pressed button is 11.5:1, navy on white for the other is 11.5:1.
 - Tested in Chromium: full multiple choice games at Easy, Expert and Mixed, one at phone size (390 px) and one on the 3D battlefield, plus a typed game to confirm typing still works. Every card showed its right answer among the choices, and the score matched the answers picked. Not tested with a screen reader, in Safari, or on a real phone.
+
+## Update, November 15, 2026 (ranks and game length)
+
+- The end screen now shows a rank based on the final score: Seeker (under 50%), Student (50%), Disciple (70%), Scribe (85%) and Bible Scholar (95%). The rank is text in gold on the dark page (10.5:1) and is included in the spoken end-of-game announcement.
+- Under the rank, one line gives the level and score, the player's best score at that level, and the score needed for the next rank. The best score for each level is saved on the player's device only.
+- The shortest game is now 25 questions. The 10 question choice was removed because a fleet cannot realistically be sunk in 10.
+- Tested in Chromium at phone size: six games at scores from 20% to 100% each showed the expected rank and best-score line, with no sideways scrolling and no script errors.

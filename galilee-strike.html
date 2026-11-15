@@ -285,6 +285,9 @@ footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:v
 #missed h2{display:block;font-size:1.5rem;font-weight:800;margin:0 0 6px}
 #missed .note{margin:0 0 18px}
 #missedBtn{margin-top:-4px}
+.rank{font-family:var(--display);font-weight:800;font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;color:var(--gold);margin:0 0 8px}
+.ranknote{color:var(--soft);margin:0;max-width:44rem}
+#rankEyebrow{margin-top:26px}
 .modes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
 .modebtn{font:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:var(--white);border:1px solid var(--navy);border-radius:999px;padding:9px 16px;cursor:pointer}
 .modebtn[aria-pressed="true"]{background:var(--navy);color:var(--white)}
@@ -333,7 +336,6 @@ footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:v
             <label class="sr-only" for="countSel">Number of questions</label>
             <select class="ddbtn" id="countSel" name="count">
               <option value="" selected disabled hidden>Questions</option>
-              <option value="10">10 questions</option>
               <option value="25">25 questions</option>
               <option value="50">50 questions</option>
               <option value="100">100 questions</option>
@@ -431,6 +433,9 @@ footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:v
       <p class="eyebrow" id="endEyebrow">Mission complete</p>
       <h2 id="endH" tabindex="-1" style="font-size:clamp(1.8rem,5vw,2.8rem);font-weight:800;display:block"></h2>
       <p class="lead" id="endLead" style="margin-top:10px"></p>
+      <p class="eyebrow" id="rankEyebrow">Your rank</p>
+      <p class="rank" id="rankName"></p>
+      <p class="ranknote" id="rankNote"></p>
       <div class="endgrid">
         <div><b id="endAsked">0%</b><span>final score</span></div>
         <div><b id="endCorrect">0</b><span>questions correct</span></div>
@@ -463,7 +468,7 @@ const name=i=>COLS[i%N]+(Math.floor(i/N)+1);
 function el(tag,props,kids){const e=document.createElement(tag);if(props)for(const k in props){if(k==="class")e.className=props[k];else if(k==="text")e.textContent=props[k];else e.setAttribute(k,props[k]);}
   (kids||[]).forEach(c=>e.appendChild(typeof c==="string"?document.createTextNode(c):c));return e;}
 
-let S=null, PLAN={pool:[],count:10,mixed:false};
+let S=null, PLAN={pool:[],count:25,mixed:false,level:"easy"};
 /* ---------- card bank and topics ----------
    Questions load from bible-card-bank.js the first time Old Testament or New Testament is checked.
    Cards tagged dok 1 are Easy, dok 2 are Advanced and dok 3 are Expert. Mixed challenge draws from all three.
@@ -1177,6 +1182,22 @@ function start(){
   S={phase:"question",enemy:makeFleet(),me:makeFleet(),deck,total:deck.length,asked:0,correct:0,missed:[],ai:[],focus:24};
   show("play"); buildBoards(); hud(); nextQuestion();
 }
+/* Ranks by final score. Each entry is [lowest percent, rank name]. The best score at each level is kept on this device. */
+const RANKS=[[95,"Bible Scholar"],[85,"Scribe"],[70,"Disciple"],[50,"Student"],[0,"Seeker"]], BESTKEY="galilee-strike-best";
+const rankFor=pct=>RANKS.find(r=>pct>=r[0]);
+function showRank(pct){
+  const r=rankFor(pct), up=RANKS[RANKS.indexOf(r)-1], lv=PLAN.level, name=LEVELNAME[lv]+(lv==="mixed"?" challenge":" level");
+  let best={}; try{ best=JSON.parse(localStorage.getItem(BESTKEY)||"{}")||{}; }catch(e){}
+  const old=typeof best[lv]==="number"?best[lv]:-1;
+  const parts=[name+", "+pct+"%."];
+  if(old<0) parts.push("This is your first score at this level.");
+  else if(pct>old) parts.push("New best. Your last best was "+old+"% ("+rankFor(old)[1]+").");
+  else parts.push("Your best at this level is "+old+"% ("+rankFor(old)[1]+").");
+  parts.push(up?"Score "+up[0]+"% or higher to reach "+up[1]+".":"This is the highest rank.");
+  if(pct>old){ best[lv]=pct; try{ localStorage.setItem(BESTKEY,JSON.stringify(best)); }catch(e){} }
+  $("rankName").textContent=r[1]; $("rankNote").textContent=parts.join(" ");
+  return r[1];
+}
 /* won is true when the enemy fleet is sunk, false when the player's fleet is sunk, and null when the questions run out. */
 function finish(won){
   S.phase="end"; setTargeting(false,"");
@@ -1186,12 +1207,13 @@ function finish(won){
   $("endLead").textContent=won?"Every shot you fired was earned with a correct answer.":won===false?"Review the questions below, then play again to earn more shots.":
     "You sank "+sunk+" of 4 enemy ships and kept "+afloat(S.me)+" of 4 of your own.";
   $("endCorrect").textContent=S.correct+" of "+S.asked; $("endAsked").textContent=pct+"%"; $("endSunk").textContent=sunk;
+  const rank=showRank(pct);
   const ul=$("review"); ul.textContent="";
   S.missed.forEach(m=>ul.appendChild(reviewItem(m.q.q,m.q.ans,m.q.ref,m.q.note,m.typed)));
   $("reviewH").hidden=ul.hidden=S.missed.length===0;
   show("end"); $("endH").focus({preventScroll:true}); reveal($("endEyebrow"));
   if(won){ sfx.win(); fireworks(); } else if(won===false) sfx.lose(); else sfx.right();
-  say($("endH").textContent+" Final score "+pct+" percent.");
+  say($("endH").textContent+" Final score "+pct+" percent. Your rank is "+rank+".");
 }
 function menu(){ show("start"); }
 $("pop").addEventListener("close",()=>{ G3.run(false); ocean(false); introMusic(); if(S) S.phase="menu"; showMissedBtn(); document.body.style.minHeight=""; const b=document.querySelector("#startForm .btn"); if(b) b.focus({preventScroll:true}); });
@@ -1305,7 +1327,7 @@ $("startForm").addEventListener("submit",e=>{ e.preventDefault(); const sb=picke
   if(!cnt){ $("countSel").focus(); return; }
   const pool=tp.flatMap(k=>TOPICS.find(x=>x.key===k).sets[lv]);
   if(!pool.length) return;
-  PLAN={pool,count:cnt,mixed:lv==="mixed"};
+  PLAN={pool,count:cnt,mixed:lv==="mixed",level:lv};
   start(); });
 /* ---------- missed questions window ---------- */
 function showMissedBtn(){ const n=missedList().length, b=$("missedBtn"); b.hidden=!n; b.textContent="Missed questions ("+n+")"; }
