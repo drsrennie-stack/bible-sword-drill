@@ -285,6 +285,8 @@ footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:v
 #missed h2{display:block;font-size:1.5rem;font-weight:800;margin:0 0 6px}
 #missed .note{margin:0 0 18px}
 #missedBtn{margin-top:-4px}
+.nudge{outline-offset:4px;animation:nudge 1400ms ease}
+@keyframes nudge{0%,100%{outline:5px solid rgba(224,184,97,0)}20%,75%{outline:5px solid #E0B861}}
 </style>
 </head>
 <body>
@@ -1046,14 +1048,18 @@ function answer(typed,skipped){
   if(!ok) list.appendChild(el("li",{class:"res picked"},[el("b",{text:skipped?"No answer":typed}),el("span",{class:"tag",text:"Your answer"})]));
   if(q.note) list.appendChild(el("li",{class:"res"},[el("span",{class:"tag",text:"Translation note"}),el("p",{text:q.note})]));
   const go=el("button",{class:"btn dark",type:"button",text:ok?"Go to the grid":"Continue"});
-  go.addEventListener("click",()=>{ if(!ok) return enemyTurn(); if(S.phase==="fire"){ eCell(S.focus).focus({preventScroll:true}); reveal(boardEl("enemy")); } });
+  go.addEventListener("click",()=>{ if(!ok) return enemyTurn(); if(S.phase==="fire"){ eCell(S.focus).focus({preventScroll:true}); if(use3d) G3.setFocus(S.focus); const t=boardEl("enemy"); reveal(t); nudge(t); say("Pick any square on the enemy grid to fire."); } });
   const card=el("div",{class:"card"},[el("p",{class:"eyebrow",text:"Answer and Bible reference"}),head,go,el("p",{text:q.q}),list]);
   $("panel").textContent=""; $("panel").appendChild(card);
   head.focus({preventScroll:true}); reveal(card);
   if(ok){ S.phase="fire"; setTargeting(true,"Your shot: pick any square"); if(S.enemy.shots[S.focus]){ const free=S.enemy.shots.findIndex(v=>!v); if(free>-1) moveFocus(free,false); } }
   say(ok?"Correct. The answer is "+q.ans+". Pick any square on the enemy grid to fire.":"Not quite. The answer is "+q.ans+".");
 }
-function reveal(node){ try{ node.scrollIntoView({block:"nearest",behavior:RM.matches?"auto":"smooth"}); }catch(e){} }
+function reveal(node){ try{ node.scrollIntoView({block:"nearest",behavior:RM.matches?"auto":"smooth"}); }catch(e){}
+  /* Inside an iframe, also ask the parent page to bring this part into view. The embed code listens for this message. */
+  try{ if(window.parent!==window){ const r=node.getBoundingClientRect(); window.parent.postMessage({type:"iframe-scroll",id:"galilee-strike",top:Math.round(r.top+window.scrollY),height:Math.round(r.height)},"*"); } }catch(e){} }
+/* Go to the grid: a short gold outline shows the player where to fire. */
+function nudge(node){ node.classList.remove("nudge"); void node.offsetWidth; node.classList.add("nudge"); setTimeout(()=>node.classList.remove("nudge"),1500); }
 function status(title,text){
   const card=el("div",{class:"card"},[el("p",{class:"eyebrow",text:"Status"}),el("p",{class:"big",text:title}),el("p",{text:text||""})]);
   $("panel").textContent=""; $("panel").appendChild(card);

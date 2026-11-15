@@ -112,3 +112,9 @@ Tested with automated runs in Chromium:
 - No script errors in any run.
 
 Not tested: a real phone, Safari or Firefox, a screen reader, the theme music and sound effects (the test browser has no audio), and the page inside a Kajabi iframe.
+
+## Update, November 15, 2026 (Go to the grid)
+
+- Go to the grid now outlines the battlefield in gold for about a second, highlights the square in focus, and announces "Pick any square on the enemy grid to fire." Before, on a wide screen the grid was already in view, so the button moved keyboard focus but showed no change. The outline is a single fade, not a flash, and is removed when "reduce motion" is on.
+- Inside an iframe the game also asks the parent page to scroll the grid into view. The embed code has to include the matching listener.
+- Tested in Chromium at desktop and phone sizes, both standalone and inside a test iframe on a different address. Not tested in Kajabi, Safari or on a real phone.
