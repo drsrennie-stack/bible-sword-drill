@@ -285,6 +285,9 @@ footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:v
 #missed h2{display:block;font-size:1.5rem;font-weight:800;margin:0 0 6px}
 #missed .note{margin:0 0 18px}
 #missedBtn{margin-top:-4px}
+.modes{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.modebtn{font:inherit;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);background:var(--white);border:1px solid var(--navy);border-radius:999px;padding:9px 16px;cursor:pointer}
+.modebtn[aria-pressed="true"]{background:var(--navy);color:var(--white)}
 .nudge{outline-offset:4px;animation:nudge 1400ms ease}
 @keyframes nudge{0%,100%{outline:5px solid rgba(224,184,97,0)}20%,75%{outline:5px solid #E0B861}}
 </style>
@@ -356,7 +359,7 @@ footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:v
   <h2 id="helpT">How to play</h2>
       <ul class="steps" id="steps">
         <li><strong>Choose</strong> <span>your topics, level and number of questions.</span></li>
-        <li><strong>Type</strong> <span>your answer to each question.</span></li>
+        <li><strong>Answer</strong> <span>each question. Type it or pick Multiple choice.</span></li>
         <li><strong>Fire</strong> <span>when you get it right.</span></li>
         <li><strong>Miss,</strong> <span>and the enemy fires back.</span></li>
         <li><strong>Sink</strong> <span>all four ships before the questions run out.</span></li>
@@ -516,11 +519,13 @@ function convCard(c,lv){
   let acc=(Array.isArray(c.accept)?c.accept:[]).map(a=>words((Array.isArray(a)?a:[a]).join(" "))).filter(a=>a.length);
   const own=words(c.answer); if(own.length&&!acc.some(a=>a.join(" ")===own.join(" "))) acc.push(own);
   if(!acc.length) return null;
-  acc.forEach(a=>a.forEach(w=>KNOWN.add(w)));
-  return {id:c.id||c.q,q:c.q,ans:c.answer,acc,ref:c.ref||"",note:c.note||"",g:c.groups||[],lv};
+  const wrong=(Array.isArray(c.choices)?c.choices:[]).filter(w=>w&&w!==c.answer);
+  acc.forEach(a=>a.forEach(w=>KNOWN.add(w))); wrong.forEach(w=>words(w).forEach(x=>{ if(x.length>4) KNOWN.add(x); }));
+  return {id:c.id||c.q,q:c.q,ans:c.answer,acc,wrong,ref:c.ref||"",note:c.note||"",g:c.groups||[],lv};
 }
 function addBank(subject){
   const bank=window[SUBJECTS[subject].global]; if(!bank||!bank.modules) return false;
+  if(!bank.read){ bank.read=true; bank.modules.forEach(m=>(m.topics||[]).forEach(tp=>(tp.cards||[]).forEach(c=>convCard(c,"")))); }
   bank.modules.forEach(m=>(m.topics||[]).forEach(tp=>{ if((tp.subject||m.id)!==subject||TOPICS.some(x=>x.key===tp.id)) return;
     let g=GROUPS.find(x=>x.ids.indexOf(tp.id)>-1); if(!g){ g=GROUPS.find(x=>x.name==="More topics"); g.ids.push(tp.id); }   /* a topic not listed above still shows up */
     const cards=tp.cards||[], sets={};
@@ -540,7 +545,8 @@ function buildDeck(pool,count,mixed){
   return shuffle(deck);
 }
 /* Missed questions are kept on this device so the player can review them later. Nothing is sent anywhere. */
-const MISSKEY="galilee-strike-missed";
+const MISSKEY="galilee-strike-missed", MODEKEY="galilee-strike-answer-mode";
+let ANSMODE="type"; try{ if(localStorage.getItem(MODEKEY)==="choice") ANSMODE="choice"; }catch(e){}
 function missedList(){ try{ const v=JSON.parse(localStorage.getItem(MISSKEY)||"[]"); return Array.isArray(v)?v:[]; }catch(e){ return []; } }
 function remember(q){ try{ const list=missedList().filter(x=>x.id!==q.id); list.unshift({id:q.id,q:q.q,a:q.ans,ref:q.ref,note:q.note}); localStorage.setItem(MISSKEY,JSON.stringify(list.slice(0,200))); }catch(e){} }
 function reviewItem(q,a,ref,note,typed){
@@ -1024,22 +1030,41 @@ function nextQuestion(){
   const pills=el("p",{class:"pills"});
   if(PLAN.mixed) pills.appendChild(el("span",{class:"pill",text:LEVELNAME[q.lv]}));
   if(q.note) pills.appendChild(el("span",{class:"pill",text:"Answer can depend on the translation"}));
-  const input=el("input",{class:"ansin",id:"ansIn",type:"text",autocomplete:"off",autocapitalize:"off",autocorrect:"off",spellcheck:"false",enterkeyhint:"done","aria-describedby":"qText"});
-  const msg=el("p",{class:"ansmsg",id:"ansMsg",role:"status"});
-  const skip=el("button",{class:"plainbtn",type:"button",text:"I don't know"});
-  const form=el("form",{class:"ansform",novalidate:""},[el("label",{for:"ansIn",text:"Your answer"}),input,msg,
-    el("div",{class:"ansrow"},[el("button",{class:"btn",type:"submit",text:"Submit answer"}),skip])]);
-  form.addEventListener("submit",e=>{ e.preventDefault(); if(!input.value.trim()){ msg.textContent="Type an answer, or choose I don't know."; input.focus(); return; } answer(input.value.trim(),false); });
-  skip.addEventListener("click",()=>answer("",true));
-  const card=el("div",{class:"card"},[el("p",{class:"eyebrow",text:"Question "+(S.asked+1)+" of "+S.total}),h,pills,form]);
+  const area=el("div",{id:"ansArea"});
+  const canPick=q.wrong.length>1, order=canPick?shuffle([q.ans].concat(q.wrong)):[];
+  const modes=el("div",{class:"modes",role:"group","aria-label":"How to answer"});
+  const mb={type:el("button",{class:"modebtn",type:"button",text:"Type it"}),choice:el("button",{class:"modebtn",type:"button",text:"Multiple choice"})};
+  function draw(focusMode){
+    const mode=canPick?ANSMODE:"type"; area.textContent="";
+    Object.keys(mb).forEach(k=>mb[k].setAttribute("aria-pressed",String(k===mode)));
+    if(mode==="choice"){
+      const list=el("ul",{class:"opts","aria-labelledby":"qText"});
+      order.forEach((txt,pos)=>{ const b=el("button",{class:"opt",type:"button"},[el("span",{class:"key","aria-hidden":"true",text:"ABCD"[pos]}),el("span",{text:txt})]);
+        b.addEventListener("click",()=>answer(txt,false,txt===q.ans)); list.appendChild(el("li",null,[b])); });
+      area.appendChild(list);
+    } else {
+      const input=el("input",{class:"ansin",id:"ansIn",type:"text",autocomplete:"off",autocapitalize:"off",autocorrect:"off",spellcheck:"false",enterkeyhint:"done","aria-describedby":"qText"});
+      const msg=el("p",{class:"ansmsg",id:"ansMsg",role:"status"});
+      const skip=el("button",{class:"plainbtn",type:"button",text:"I don't know"});
+      const form=el("form",{class:"ansform",novalidate:""},[el("label",{for:"ansIn",text:"Your answer"}),input,msg,
+        el("div",{class:"ansrow"},[el("button",{class:"btn",type:"submit",text:"Submit answer"}),skip])]);
+      form.addEventListener("submit",e=>{ e.preventDefault(); if(!input.value.trim()){ msg.textContent="Type an answer, or choose I don't know."; input.focus(); return; } answer(input.value.trim(),false); });
+      skip.addEventListener("click",()=>answer("",true));
+      area.appendChild(form);
+    }
+    if(focusMode) mb[mode].focus({preventScroll:true});
+  }
+  Object.keys(mb).forEach(k=>{ mb[k].addEventListener("click",()=>{ ANSMODE=k; try{ localStorage.setItem(MODEKEY,k); }catch(e){} draw(true); }); if(canPick) modes.appendChild(mb[k]); });
+  draw(false);
+  const card=el("div",{class:"card"},[el("p",{class:"eyebrow",text:"Question "+(S.asked+1)+" of "+S.total}),h,pills].concat(canPick?[modes]:[],[area]));
   $("panel").textContent=""; $("panel").appendChild(card);
-  /* On a touch screen the question gets focus so the keyboard does not cover it. Otherwise the answer box does. */
-  (window.matchMedia("(pointer: coarse)").matches?h:input).focus({preventScroll:true}); reveal(card);
+  /* The answer box gets focus when the player is typing with a keyboard. Otherwise the question does, so a touch keyboard does not cover it. */
+  const box=$("ansIn"); (box&&!window.matchMedia("(pointer: coarse)").matches?box:h).focus({preventScroll:true}); reveal(card);
 }
-function answer(typed,skipped){
+function answer(typed,skipped,picked){
   if(S.phase!=="question") return;
   const q=S.deck[S.asked]; S.phase="feedback"; S.asked++;
-  const ok=!skipped&&isRight(typed,q);
+  const ok=picked!==undefined?picked:!skipped&&isRight(typed,q);
   if(ok){ S.correct++; sfx.right(); } else { sfx.wrong(); S.missed.push({q,typed}); remember(q); }
   hud();
   const head=el("p",{class:"big",id:"fbHead",tabindex:"-1",text:ok?"Correct. Fire on any square.":"Not quite. The enemy gets a shot."});

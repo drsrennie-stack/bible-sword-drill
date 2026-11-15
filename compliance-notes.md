@@ -118,3 +118,10 @@ Not tested: a real phone, Safari or Firefox, a screen reader, the theme music an
 - Go to the grid now outlines the battlefield in gold for about a second, highlights the square in focus, and announces "Pick any square on the enemy grid to fire." Before, on a wide screen the grid was already in view, so the button moved keyboard focus but showed no change. The outline is a single fade, not a flash, and is removed when "reduce motion" is on.
 - Inside an iframe the game also asks the parent page to scroll the grid into view. The embed code has to include the matching listener.
 - Tested in Chromium at desktop and phone sizes, both standalone and inside a test iframe on a different address. Not tested in Kajabi, Safari or on a real phone.
+
+## Update, November 15, 2026 (multiple choice)
+
+- Each question now has two answer buttons, Type it and Multiple choice. They are a labeled group, each reports whether it is pressed (aria-pressed), and the choice is remembered on the device.
+- Multiple choice shows the answers as buttons labeled A to D in a shuffled order. They are reached with Tab and chosen with Enter or Space, the same as in Vital Strike. Feedback names the correct answer and the player's answer in text.
+- Contrast: white on navy for the pressed button is 11.5:1, navy on white for the other is 11.5:1.
+- Tested in Chromium: full multiple choice games at Easy, Expert and Mixed, one at phone size (390 px) and one on the 3D battlefield, plus a typed game to confirm typing still works. Every card showed its right answer among the choices, and the score matched the answers picked. Not tested with a screen reader, in Safari, or on a real phone.

@@ -13,6 +13,9 @@
      accept   answers the game takes as correct. Each inner list is
               one acceptable answer, and every word in it must be
               in what the player types. Small typos are forgiven.
+     choices  the wrong answers shown when the player picks
+              Multiple choice. Claude wrote these. The right
+              answer is added and the order is shuffled.
      ref      the Bible reference shown with the answer
      groups   optional. Cards that share a group name are never
               asked in the same game, because they test the same
@@ -41,7 +44,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["noah"]
        ],
-       "ref": "Genesis 6:13-22"
+       "ref": "Genesis 6:13-22",
+       "choices": ["Moses", "Abraham", "Jonah"]
       },
       {
        "id": "BT0005",
@@ -52,6 +56,7 @@ window.BIBLE_CARD_BANK = {
         ["adam"]
        ],
        "ref": "Genesis 2:7",
+       "choices": ["Noah", "Abel", "Seth"],
        "groups": ["adam"]
       },
       {
@@ -63,6 +68,7 @@ window.BIBLE_CARD_BANK = {
         ["eve"]
        ],
        "ref": "Genesis 2:21-23",
+       "choices": ["Sarah", "Ruth", "Mary"],
        "groups": ["eve"]
       },
       {
@@ -74,6 +80,7 @@ window.BIBLE_CARD_BANK = {
         ["eden"]
        ],
        "ref": "Genesis 2:8",
+       "choices": ["Gethsemane", "Canaan", "Goshen"],
        "groups": ["adam", "eve"]
       },
       {
@@ -84,7 +91,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["cain"]
        ],
-       "ref": "Genesis 4:8"
+       "ref": "Genesis 4:8",
+       "choices": ["Seth", "Esau", "Enoch"]
       },
       {
        "id": "BT0021",
@@ -96,6 +104,7 @@ window.BIBLE_CARD_BANK = {
         ["bow"]
        ],
        "ref": "Genesis 9:13",
+       "choices": ["A dove", "A star", "An olive branch"],
        "note": "Older translations say \"bow.\""
       },
       {
@@ -106,7 +115,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["genesis"]
        ],
-       "ref": "Genesis 1:1"
+       "ref": "Genesis 1:1",
+       "choices": ["Exodus", "Psalms", "Matthew"]
       },
       {
        "id": "BT0361",
@@ -116,7 +126,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["light"]
        ],
-       "ref": "Genesis 1:3-5"
+       "ref": "Genesis 1:3-5",
+       "choices": ["The sun and moon", "Land and seas", "Animals"]
       },
       {
        "id": "BT0365",
@@ -130,7 +141,8 @@ window.BIBLE_CARD_BANK = {
         ["seven"],
         ["sabbath"]
        ],
-       "ref": "Genesis 2:2-3"
+       "ref": "Genesis 2:2-3",
+       "choices": ["First day", "Third day", "Sixth day"]
       },
       {
        "id": "BT0393",
@@ -146,6 +158,7 @@ window.BIBLE_CARD_BANK = {
         ["clay"]
        ],
        "ref": "Genesis 2:7",
+       "choices": ["Water", "A rib", "Stone"],
        "groups": ["adam"]
       },
       {
@@ -156,7 +169,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["enoch"]
        ],
-       "ref": "Genesis 5:21"
+       "ref": "Genesis 5:21",
+       "choices": ["Lamech", "Jared", "Noah"]
       },
       {
        "id": "BT0741",
@@ -166,7 +180,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["lamech"]
        ],
-       "ref": "Genesis 5:28-29"
+       "ref": "Genesis 5:28-29",
+       "choices": ["Methuselah", "Enoch", "Shem"]
       },
       {
        "id": "BT0745",
@@ -176,7 +191,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["969"]
        ],
-       "ref": "Genesis 5:27"
+       "ref": "Genesis 5:27",
+       "choices": ["930 years", "950 years", "777 years"]
       }
      ]
     },
@@ -195,6 +211,7 @@ window.BIBLE_CARD_BANK = {
         ["sarai"]
        ],
        "ref": "Genesis 17:15",
+       "choices": ["Rebekah", "Rachel", "Leah"],
        "groups": ["sarah"]
       },
       {
@@ -206,6 +223,7 @@ window.BIBLE_CARD_BANK = {
         ["isaac"]
        ],
        "ref": "Genesis 21:1-3",
+       "choices": ["Ishmael", "Jacob", "Esau"],
        "groups": ["sarah"]
       },
       {
@@ -218,7 +236,8 @@ window.BIBLE_CARD_BANK = {
         ["rebecca"],
         ["rebekka"]
        ],
-       "ref": "Genesis 24:67"
+       "ref": "Genesis 24:67",
+       "choices": ["Rachel", "Leah", "Sarah"]
       },
       {
        "id": "BT0037",
@@ -229,6 +248,7 @@ window.BIBLE_CARD_BANK = {
         ["esau"]
        ],
        "ref": "Genesis 25:24-26",
+       "choices": ["Joseph", "Benjamin", "Ishmael"],
        "groups": ["esau"]
       },
       {
@@ -239,7 +259,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["israel"]
        ],
-       "ref": "Genesis 32:28"
+       "ref": "Genesis 32:28",
+       "choices": ["Abraham", "Judah", "Joshua"]
       },
       {
        "id": "BT0045",
@@ -250,6 +271,7 @@ window.BIBLE_CARD_BANK = {
         ["joseph"]
        ],
        "ref": "Genesis 37:3",
+       "choices": ["Benjamin", "Reuben", "Judah"],
        "note": "Translations describe the robe differently: many colors, ornate, or long sleeved."
       },
       {
@@ -260,7 +282,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["egypt"]
        ],
-       "ref": "Genesis 41:40-43"
+       "ref": "Genesis 41:40-43",
+       "choices": ["Babylon", "Assyria", "Persia"]
       },
       {
        "id": "BT0397",
@@ -270,7 +293,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["lot"]
        ],
-       "ref": "Genesis 11:27"
+       "ref": "Genesis 11:27",
+       "choices": ["Laban", "Isaac", "Ishmael"]
       },
       {
        "id": "BT0401",
@@ -280,7 +304,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ishmael"]
        ],
-       "ref": "Genesis 16:15"
+       "ref": "Genesis 16:15",
+       "choices": ["Isaac", "Esau", "Jacob"]
       },
       {
        "id": "BT0405",
@@ -291,6 +316,7 @@ window.BIBLE_CARD_BANK = {
         ["esau"]
        ],
        "ref": "Genesis 25:29-34",
+       "choices": ["Jacob", "Reuben", "Ishmael"],
        "groups": ["esau"]
       },
       {
@@ -302,6 +328,7 @@ window.BIBLE_CARD_BANK = {
         ["joseph"]
        ],
        "ref": "Genesis 30:22-24",
+       "choices": ["Benjamin", "Reuben", "Judah"],
        "groups": ["rachel"]
       },
       {
@@ -313,6 +340,7 @@ window.BIBLE_CARD_BANK = {
         ["benjamin"]
        ],
        "ref": "Genesis 35:16-18",
+       "choices": ["Joseph", "Dan", "Judah"],
        "groups": ["rachel"]
       },
       {
@@ -324,6 +352,7 @@ window.BIBLE_CARD_BANK = {
         ["benjamin"]
        ],
        "ref": "Genesis 35:24",
+       "choices": ["Reuben", "Simeon", "Judah"],
        "groups": ["rachel"]
       },
       {
@@ -338,7 +367,8 @@ window.BIBLE_CARD_BANK = {
         ["food"],
         ["crops"]
        ],
-       "ref": "Genesis 41:48-49"
+       "ref": "Genesis 41:48-49",
+       "choices": ["Gold", "Livestock", "Wine"]
       },
       {
        "id": "BT0749",
@@ -348,7 +378,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["terah"]
        ],
-       "ref": "Genesis 11:26"
+       "ref": "Genesis 11:26",
+       "choices": ["Nahor", "Haran", "Laban"]
       },
       {
        "id": "BT0753",
@@ -360,7 +391,8 @@ window.BIBLE_CARD_BANK = {
         ["melchisedec"],
         ["melchisedek"]
        ],
-       "ref": "Genesis 14:18-20"
+       "ref": "Genesis 14:18-20",
+       "choices": ["Abimelech", "Jethro", "Balak"]
       },
       {
        "id": "BT0757",
@@ -370,7 +402,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["laban"]
        ],
-       "ref": "Genesis 24:29"
+       "ref": "Genesis 24:29",
+       "choices": ["Bethuel", "Lot", "Nahor"]
       },
       {
        "id": "BT0761",
@@ -380,7 +413,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["bilhah"]
        ],
-       "ref": "Genesis 30:3-8"
+       "ref": "Genesis 30:3-8",
+       "choices": ["Zilpah", "Leah", "Rachel"]
       },
       {
        "id": "BT0765",
@@ -390,7 +424,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["zilpah"]
        ],
-       "ref": "Genesis 30:9-13"
+       "ref": "Genesis 30:9-13",
+       "choices": ["Bilhah", "Leah", "Rachel"]
       },
       {
        "id": "BT0769",
@@ -400,7 +435,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["joseph"]
        ],
-       "ref": "Genesis 41:50-52"
+       "ref": "Genesis 41:50-52",
+       "choices": ["Judah", "Benjamin", "Levi"]
       },
       {
        "id": "BT0773",
@@ -410,7 +446,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["asenath"]
        ],
-       "ref": "Genesis 41:45"
+       "ref": "Genesis 41:45",
+       "choices": ["Zipporah", "Hagar", "Keturah"]
       }
      ]
     },
@@ -429,7 +466,8 @@ window.BIBLE_CARD_BANK = {
         ["daughter", "pharaoh"],
         ["princess"]
        ],
-       "ref": "Exodus 2:5-10"
+       "ref": "Exodus 2:5-10",
+       "choices": ["Miriam", "Jochebed", "Zipporah"]
       },
       {
        "id": "BT0057",
@@ -440,6 +478,7 @@ window.BIBLE_CARD_BANK = {
         ["aaron"]
        ],
        "ref": "Exodus 4:14",
+       "choices": ["Joshua", "Caleb", "Hur"],
        "groups": ["moses-aaron"]
       },
       {
@@ -450,7 +489,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["miriam"]
        ],
-       "ref": "Exodus 15:20"
+       "ref": "Exodus 15:20",
+       "choices": ["Zipporah", "Deborah", "Jochebed"]
       },
       {
        "id": "BT0065",
@@ -464,6 +504,7 @@ window.BIBLE_CARD_BANK = {
         ["yam", "suph"]
        ],
        "ref": "Exodus 14:21-22",
+       "choices": ["The Dead Sea", "The Sea of Galilee", "The Mediterranean Sea"],
        "note": "The Hebrew name is Yam Suph, which some translate as Sea of Reeds."
       },
       {
@@ -474,7 +515,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["manna"]
        ],
-       "ref": "Exodus 16:14-15"
+       "ref": "Exodus 16:14-15",
+       "choices": ["Figs", "Barley loaves", "Grapes"]
       },
       {
        "id": "BT0073",
@@ -486,6 +528,7 @@ window.BIBLE_CARD_BANK = {
         ["horeb"]
        ],
        "ref": "Exodus 19:20; 20:1-17",
+       "choices": ["Mount Carmel", "Mount Ararat", "Mount Nebo"],
        "groups": ["sinai"],
        "note": "Deuteronomy calls this mountain Horeb."
       },
@@ -499,6 +542,7 @@ window.BIBLE_CARD_BANK = {
         ["10"]
        ],
        "ref": "Exodus 34:28",
+       "choices": ["Seven", "Twelve", "Forty"],
        "groups": ["sinai"],
        "note": "Jewish, Catholic and Protestant traditions divide the ten differently."
       },
@@ -511,6 +555,7 @@ window.BIBLE_CARD_BANK = {
         ["moses"]
        ],
        "ref": "Exodus 20:1-17",
+       "choices": ["Aaron", "Joshua", "Abraham"],
        "groups": ["sinai"]
       },
       {
@@ -521,7 +566,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["moses"]
        ],
-       "ref": "Exodus 12:31-42"
+       "ref": "Exodus 12:31-42",
+       "choices": ["Joshua", "Joseph", "Abraham"]
       },
       {
        "id": "BT0425",
@@ -533,6 +579,7 @@ window.BIBLE_CARD_BANK = {
         ["reuel"]
        ],
        "ref": "Exodus 3:1",
+       "choices": ["Laban", "Aaron", "Hur"],
        "note": "Exodus 2:18 calls him Reuel."
       },
       {
@@ -543,7 +590,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["aaron"]
        ],
-       "ref": "Exodus 32:2-4"
+       "ref": "Exodus 32:2-4",
+       "choices": ["Moses", "Joshua", "Korah"]
       },
       {
        "id": "BT0433",
@@ -555,7 +603,8 @@ window.BIBLE_CARD_BANK = {
         ["levites"],
         ["levite"]
        ],
-       "ref": "Numbers 3:5-10"
+       "ref": "Numbers 3:5-10",
+       "choices": ["Judah", "Benjamin", "Ephraim"]
       },
       {
        "id": "BT0437",
@@ -565,7 +614,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["eleazar"]
        ],
-       "ref": "Numbers 20:25-28"
+       "ref": "Numbers 20:25-28",
+       "choices": ["Joshua", "Eli", "Caleb"]
       },
       {
        "id": "BT0441",
@@ -575,7 +625,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["balak"]
        ],
-       "ref": "Numbers 22:2-6"
+       "ref": "Numbers 22:2-6",
+       "choices": ["Og", "Sihon", "Eglon"]
       },
       {
        "id": "BT0445",
@@ -586,7 +637,8 @@ window.BIBLE_CARD_BANK = {
         ["donkey"],
         ["ass"]
        ],
-       "ref": "Numbers 22:28"
+       "ref": "Numbers 22:28",
+       "choices": ["Camel", "Serpent", "Raven"]
       },
       {
        "id": "BT0777",
@@ -597,6 +649,7 @@ window.BIBLE_CARD_BANK = {
         ["amram"]
        ],
        "ref": "Exodus 6:20",
+       "choices": ["Kohath", "Levi", "Jethro"],
        "groups": ["moses-aaron"]
       },
       {
@@ -608,6 +661,7 @@ window.BIBLE_CARD_BANK = {
         ["jochebed"]
        ],
        "ref": "Exodus 6:20",
+       "choices": ["Miriam", "Zipporah", "Elisheba"],
        "groups": ["moses-aaron"]
       },
       {
@@ -620,6 +674,7 @@ window.BIBLE_CARD_BANK = {
         ["bezaleel"]
        ],
        "ref": "Exodus 31:1-5",
+       "choices": ["Hiram", "Aaron", "Hur"],
        "groups": ["bezalel"]
       },
       {
@@ -632,6 +687,7 @@ window.BIBLE_CARD_BANK = {
         ["aholiab"]
        ],
        "ref": "Exodus 31:6",
+       "choices": ["Hur", "Ithamar", "Hiram"],
        "groups": ["bezalel"]
       },
       {
@@ -642,7 +698,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["nadab", "abihu"]
        ],
-       "ref": "Leviticus 10:1-2"
+       "ref": "Leviticus 10:1-2",
+       "choices": ["Eleazar and Ithamar", "Hophni and Phinehas", "Korah and Dathan"]
       },
       {
        "id": "BT0797",
@@ -652,7 +709,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["eleazar"]
        ],
-       "ref": "Numbers 25:11"
+       "ref": "Numbers 25:11",
+       "choices": ["Aaron", "Ithamar", "Nadab"]
       },
       {
        "id": "BT0801",
@@ -662,7 +720,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["joshua", "caleb"]
        ],
-       "ref": "Numbers 14:6-9"
+       "ref": "Numbers 14:6-9",
+       "choices": ["Moses and Aaron", "Nadab and Abihu", "Eldad and Medad"]
       },
       {
        "id": "BT0805",
@@ -672,7 +731,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jephunneh"]
        ],
-       "ref": "Numbers 13:6"
+       "ref": "Numbers 13:6",
+       "choices": ["Nun", "Hur", "Jesse"]
       },
       {
        "id": "BT0809",
@@ -682,7 +742,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["og"]
        ],
-       "ref": "Numbers 21:33-35"
+       "ref": "Numbers 21:33-35",
+       "choices": ["Sihon", "Balak", "Eglon"]
       },
       {
        "id": "BT0813",
@@ -692,7 +753,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["sihon"]
        ],
-       "ref": "Numbers 21:21-26"
+       "ref": "Numbers 21:21-26",
+       "choices": ["Og", "Balak", "Agag"]
       }
      ]
     },
@@ -710,6 +772,7 @@ window.BIBLE_CARD_BANK = {
         ["joshua"]
        ],
        "ref": "Joshua 1:1-2",
+       "choices": ["Caleb", "Aaron", "Samuel"],
        "groups": ["joshua"]
       },
       {
@@ -721,6 +784,7 @@ window.BIBLE_CARD_BANK = {
         ["jericho"]
        ],
        "ref": "Joshua 6:20",
+       "choices": ["Ai", "Jerusalem", "Bethel"],
        "groups": ["jericho"]
       },
       {
@@ -732,6 +796,7 @@ window.BIBLE_CARD_BANK = {
         ["rahab"]
        ],
        "ref": "Joshua 2:1-6",
+       "choices": ["Ruth", "Deborah", "Jael"],
        "groups": ["jericho"]
       },
       {
@@ -743,6 +808,7 @@ window.BIBLE_CARD_BANK = {
         ["samson"]
        ],
        "ref": "Judges 16:17-19",
+       "choices": ["Gideon", "Jephthah", "Ehud"],
        "groups": ["samson"]
       },
       {
@@ -754,6 +820,7 @@ window.BIBLE_CARD_BANK = {
         ["delilah"]
        ],
        "ref": "Judges 16:18-19",
+       "choices": ["Jezebel", "Bathsheba", "Jael"],
        "groups": ["samson"]
       },
       {
@@ -764,7 +831,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["deborah"]
        ],
-       "ref": "Judges 4:4"
+       "ref": "Judges 4:4",
+       "choices": ["Miriam", "Huldah", "Esther"]
       },
       {
        "id": "BT0105",
@@ -774,7 +842,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["gideon"]
        ],
-       "ref": "Judges 7:7"
+       "ref": "Judges 7:7",
+       "choices": ["Samson", "Joshua", "Barak"]
       },
       {
        "id": "BT0109",
@@ -784,7 +853,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["naomi"]
        ],
-       "ref": "Ruth 1:3-5"
+       "ref": "Ruth 1:3-5",
+       "choices": ["Orpah", "Hannah", "Rachel"]
       },
       {
        "id": "BT0113",
@@ -794,7 +864,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["boaz"]
        ],
-       "ref": "Ruth 4:13"
+       "ref": "Ruth 4:13",
+       "choices": ["Elimelech", "Jesse", "Obed"]
       },
       {
        "id": "BT0449",
@@ -804,7 +875,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["nun"]
        ],
-       "ref": "Joshua 1:1"
+       "ref": "Joshua 1:1",
+       "choices": ["Jephunneh", "Amram", "Jesse"]
       },
       {
        "id": "BT0453",
@@ -815,6 +887,7 @@ window.BIBLE_CARD_BANK = {
         ["joshua"]
        ],
        "ref": "Joshua 3:14-17",
+       "choices": ["Moses", "Caleb", "Gideon"],
        "groups": ["joshua"]
       },
       {
@@ -825,7 +898,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jael"]
        ],
-       "ref": "Judges 4:21"
+       "ref": "Judges 4:21",
+       "choices": ["Deborah", "Delilah", "Rahab"]
       },
       {
        "id": "BT0461",
@@ -836,6 +910,7 @@ window.BIBLE_CARD_BANK = {
         ["jephthah"]
        ],
        "ref": "Judges 11:30-39",
+       "choices": ["Gideon", "Samson", "Eli"],
        "note": "Readers disagree on whether Jephthah sacrificed his daughter or gave her to lifelong service."
       },
       {
@@ -848,6 +923,7 @@ window.BIBLE_CARD_BANK = {
         ["salma"]
        ],
        "ref": "Matthew 1:5",
+       "choices": ["Boaz", "Obed", "Nahshon"],
        "groups": ["salmon"],
        "note": "Most readers take the Rahab in this genealogy to be Rahab of Jericho."
       },
@@ -859,7 +935,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ehud"]
        ],
-       "ref": "Judges 3:15-21"
+       "ref": "Judges 3:15-21",
+       "choices": ["Othniel", "Shamgar", "Gideon"]
       },
       {
        "id": "BT0825",
@@ -870,6 +947,7 @@ window.BIBLE_CARD_BANK = {
         ["shamgar"]
        ],
        "ref": "Judges 3:31",
+       "choices": ["Samson", "Ehud", "Othniel"],
        "note": "The text does not call Shamgar a judge, but it lists him among those who saved Israel."
       },
       {
@@ -880,7 +958,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["joash"]
        ],
-       "ref": "Judges 6:11"
+       "ref": "Judges 6:11",
+       "choices": ["Manoah", "Jesse", "Kish"]
       },
       {
        "id": "BT0833",
@@ -892,7 +971,8 @@ window.BIBLE_CARD_BANK = {
         ["jerub", "baal"],
         ["jerubaal"]
        ],
-       "ref": "Judges 6:32"
+       "ref": "Judges 6:32",
+       "choices": ["Jedidiah", "Abimelech", "Barak"]
       },
       {
        "id": "BT0837",
@@ -902,7 +982,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["mahlon"]
        ],
-       "ref": "Ruth 4:10"
+       "ref": "Ruth 4:10",
+       "choices": ["Chilion", "Elimelech", "Boaz"]
       },
       {
        "id": "BT0841",
@@ -914,6 +995,7 @@ window.BIBLE_CARD_BANK = {
         ["salma"]
        ],
        "ref": "Matthew 1:5",
+       "choices": ["Obed", "Jesse", "Nahshon"],
        "groups": ["salmon"]
       },
       {
@@ -924,7 +1006,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ruth"]
        ],
-       "ref": "Ruth 4:13-17"
+       "ref": "Ruth 4:13-17",
+       "choices": ["Naomi", "Rahab", "Orpah"]
       }
      ]
     },
@@ -941,7 +1024,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["hannah"]
        ],
-       "ref": "1 Samuel 1:20"
+       "ref": "1 Samuel 1:20",
+       "choices": ["Peninnah", "Naomi", "Elizabeth"]
       },
       {
        "id": "BT0121",
@@ -951,7 +1035,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["saul"]
        ],
-       "ref": "1 Samuel 10:1; 11:15"
+       "ref": "1 Samuel 10:1; 11:15",
+       "choices": ["David", "Solomon", "Samuel"]
       },
       {
        "id": "BT0125",
@@ -962,6 +1047,7 @@ window.BIBLE_CARD_BANK = {
         ["david"]
        ],
        "ref": "1 Samuel 17:49-50",
+       "choices": ["Saul", "Jonathan", "Samson"],
        "groups": ["goliath"],
        "note": "2 Samuel 21:19 credits Elhanan with killing Goliath in some translations."
       },
@@ -978,6 +1064,7 @@ window.BIBLE_CARD_BANK = {
         ["rock"]
        ],
        "ref": "1 Samuel 17:49",
+       "choices": ["Sword and shield", "Bow and arrow", "Spear"],
        "groups": ["goliath"]
       },
       {
@@ -988,7 +1075,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jonathan"]
        ],
-       "ref": "1 Samuel 18:1-3"
+       "ref": "1 Samuel 18:1-3",
+       "choices": ["Absalom", "Solomon", "Joab"]
       },
       {
        "id": "BT0377",
@@ -998,7 +1086,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jerusalem"]
        ],
-       "ref": "2 Samuel 5:6-9"
+       "ref": "2 Samuel 5:6-9",
+       "choices": ["Bethlehem", "Samaria", "Jericho"]
       },
       {
        "id": "BT0389",
@@ -1009,6 +1098,7 @@ window.BIBLE_CARD_BANK = {
         ["goliath"]
        ],
        "ref": "1 Samuel 17:4,49-50",
+       "choices": ["Og", "Sisera", "Haman"],
        "groups": ["goliath"],
        "note": "2 Samuel 21:19 credits Elhanan with killing Goliath in some translations."
       },
@@ -1020,7 +1110,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["eli"]
        ],
-       "ref": "1 Samuel 3:1-9"
+       "ref": "1 Samuel 3:1-9",
+       "choices": ["Nathan", "Saul", "Ahimelech"]
       },
       {
        "id": "BT0469",
@@ -1030,7 +1121,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["samuel"]
        ],
-       "ref": "1 Samuel 16:12-13"
+       "ref": "1 Samuel 16:12-13",
+       "choices": ["Nathan", "Eli", "Zadok"]
       },
       {
        "id": "BT0473",
@@ -1040,7 +1132,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jesse"]
        ],
-       "ref": "1 Samuel 16:1"
+       "ref": "1 Samuel 16:1",
+       "choices": ["Obed", "Boaz", "Saul"]
       },
       {
        "id": "BT0477",
@@ -1050,7 +1143,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["absalom"]
        ],
-       "ref": "2 Samuel 18:9-15"
+       "ref": "2 Samuel 18:9-15",
+       "choices": ["Amnon", "Adonijah", "Solomon"]
       },
       {
        "id": "BT0481",
@@ -1060,7 +1154,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["nathan"]
        ],
-       "ref": "2 Samuel 12:1-7"
+       "ref": "2 Samuel 12:1-7",
+       "choices": ["Samuel", "Elijah", "Isaiah"]
       },
       {
        "id": "BT0485",
@@ -1070,7 +1165,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["uriah"]
        ],
-       "ref": "2 Samuel 11:3"
+       "ref": "2 Samuel 11:3",
+       "choices": ["Joab", "Nabal", "Abner"]
       },
       {
        "id": "BT0609",
@@ -1081,6 +1177,7 @@ window.BIBLE_CARD_BANK = {
         ["david"]
        ],
        "ref": "2 Samuel 12:24",
+       "choices": ["Saul", "Jesse", "Nathan"],
        "groups": ["solomon-david"]
       },
       {
@@ -1091,7 +1188,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["kish"]
        ],
-       "ref": "1 Samuel 9:1-2"
+       "ref": "1 Samuel 9:1-2",
+       "choices": ["Ner", "Abner", "Jesse"]
       },
       {
        "id": "BT0853",
@@ -1101,7 +1199,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ahimelech"]
        ],
-       "ref": "1 Samuel 22:11-19"
+       "ref": "1 Samuel 22:11-19",
+       "choices": ["Abiathar", "Eli", "Zadok"]
       },
       {
        "id": "BT0857",
@@ -1111,7 +1210,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["abiathar"]
        ],
-       "ref": "1 Samuel 22:20"
+       "ref": "1 Samuel 22:20",
+       "choices": ["Ahimelech", "Zadok", "Doeg"]
       },
       {
        "id": "BT0861",
@@ -1124,6 +1224,7 @@ window.BIBLE_CARD_BANK = {
         ["meribbaal"]
        ],
        "ref": "2 Samuel 9:6-13",
+       "choices": ["Ishbosheth", "Ziba", "Abner"],
        "note": "1 Chronicles calls him Merib-baal."
       },
       {
@@ -1134,7 +1235,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["tamar"]
        ],
-       "ref": "2 Samuel 13:1-14"
+       "ref": "2 Samuel 13:1-14",
+       "choices": ["Michal", "Abigail", "Bathsheba"]
       },
       {
        "id": "BT0869",
@@ -1145,6 +1247,7 @@ window.BIBLE_CARD_BANK = {
         ["joab"]
        ],
        "ref": "2 Samuel 18:14-15",
+       "choices": ["Abner", "Abishai", "Amasa"],
        "note": "Joab struck Absalom first, and his armor bearers finished the killing."
       },
       {
@@ -1157,7 +1260,8 @@ window.BIBLE_CARD_BANK = {
         ["bath", "sheba"],
         ["bathshua"]
        ],
-       "ref": "2 Samuel 12:24"
+       "ref": "2 Samuel 12:24",
+       "choices": ["Abigail", "Michal", "Haggith"]
       }
      ]
     },
@@ -1175,6 +1279,7 @@ window.BIBLE_CARD_BANK = {
         ["solomon"]
        ],
        "ref": "1 Kings 1:39",
+       "choices": ["Absalom", "Rehoboam", "Adonijah"],
        "groups": ["solomon-david"]
       },
       {
@@ -1185,7 +1290,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["solomon"]
        ],
-       "ref": "1 Kings 3:9-12"
+       "ref": "1 Kings 3:9-12",
+       "choices": ["David", "Saul", "Hezekiah"]
       },
       {
        "id": "BT0145",
@@ -1195,7 +1301,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["solomon"]
        ],
-       "ref": "1 Kings 6:1"
+       "ref": "1 Kings 6:1",
+       "choices": ["David", "Hezekiah", "Zerubbabel"]
       },
       {
        "id": "BT0149",
@@ -1205,7 +1312,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["elijah"]
        ],
-       "ref": "1 Kings 18:20-39"
+       "ref": "1 Kings 18:20-39",
+       "choices": ["Elisha", "Isaiah", "Jeremiah"]
       },
       {
        "id": "BT0153",
@@ -1215,7 +1323,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["elisha"]
        ],
-       "ref": "2 Kings 2:9-15"
+       "ref": "2 Kings 2:9-15",
+       "choices": ["Isaiah", "Samuel", "Nathan"]
       },
       {
        "id": "BT0489",
@@ -1225,7 +1334,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["sheba"]
        ],
-       "ref": "1 Kings 10:1"
+       "ref": "1 Kings 10:1",
+       "choices": ["Esther", "Vashti", "Jezebel"]
       },
       {
        "id": "BT0493",
@@ -1235,7 +1345,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jeroboam"]
        ],
-       "ref": "1 Kings 12:20"
+       "ref": "1 Kings 12:20",
+       "choices": ["Rehoboam", "Ahab", "Omri"]
       },
       {
        "id": "BT0497",
@@ -1245,7 +1356,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["rehoboam"]
        ],
-       "ref": "1 Kings 12:17"
+       "ref": "1 Kings 12:17",
+       "choices": ["Jeroboam", "Asa", "Hezekiah"]
       },
       {
        "id": "BT0501",
@@ -1255,7 +1367,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ahab"]
        ],
-       "ref": "1 Kings 16:30-31"
+       "ref": "1 Kings 16:30-31",
+       "choices": ["Omri", "Jehu", "Ahaz"]
       },
       {
        "id": "BT0505",
@@ -1265,7 +1378,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["elijah"]
        ],
-       "ref": "1 Kings 17:4-6"
+       "ref": "1 Kings 17:4-6",
+       "choices": ["Elisha", "Amos", "Jonah"]
       },
       {
        "id": "BT0509",
@@ -1275,7 +1389,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["elisha"]
        ],
-       "ref": "2 Kings 5:9-14"
+       "ref": "2 Kings 5:9-14",
+       "choices": ["Elijah", "Isaiah", "Samuel"]
       },
       {
        "id": "BT0513",
@@ -1285,7 +1400,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jordan"]
        ],
-       "ref": "2 Kings 5:10-14"
+       "ref": "2 Kings 5:10-14",
+       "choices": ["Nile", "Euphrates", "Abana"]
       },
       {
        "id": "BT0517",
@@ -1296,6 +1412,7 @@ window.BIBLE_CARD_BANK = {
         ["josiah"]
        ],
        "ref": "2 Kings 22:8-11",
+       "choices": ["Hezekiah", "Manasseh", "Joash"],
        "groups": ["josiah"]
       },
       {
@@ -1307,6 +1424,7 @@ window.BIBLE_CARD_BANK = {
         ["hilkiah"]
        ],
        "ref": "2 Kings 22:8",
+       "choices": ["Zadok", "Eli", "Ezra"],
        "groups": ["josiah"]
       },
       {
@@ -1320,6 +1438,7 @@ window.BIBLE_CARD_BANK = {
         ["assyrian"]
        ],
        "ref": "2 Kings 17:5-6",
+       "choices": ["Babylon", "Persia", "Egypt"],
        "note": "The Bible does not give the year. The date comes from historians."
       },
       {
@@ -1336,6 +1455,7 @@ window.BIBLE_CARD_BANK = {
         ["neo", "babylonian"]
        ],
        "ref": "2 Kings 25:8-10",
+       "choices": ["Assyria", "Persia", "Rome"],
        "groups": ["bab-a", "bab-b"]
       },
       {
@@ -1350,6 +1470,7 @@ window.BIBLE_CARD_BANK = {
         ["huramabi"]
        ],
        "ref": "1 Kings 7:13-14",
+       "choices": ["Bezalel", "Oholiab", "Adoniram"],
        "note": "Chronicles spells the name Huram."
       },
       {
@@ -1360,7 +1481,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["zeruah"]
        ],
-       "ref": "1 Kings 11:26"
+       "ref": "1 Kings 11:26",
+       "choices": ["Naamah", "Maacah", "Haggith"]
       },
       {
        "id": "BT0885",
@@ -1370,7 +1492,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ahijah"]
        ],
-       "ref": "1 Kings 11:29-31"
+       "ref": "1 Kings 11:29-31",
+       "choices": ["Shemaiah", "Elijah", "Nathan"]
       },
       {
        "id": "BT0889",
@@ -1389,6 +1512,7 @@ window.BIBLE_CARD_BANK = {
         ["none"]
        ],
        "ref": "1 Kings 17:8-16",
+       "choices": ["Hannah", "Huldah", "Abigail"],
        "note": "The Bible does not give her name."
       },
       {
@@ -1399,7 +1523,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["hezekiah"]
        ],
-       "ref": "2 Kings 20:8-11"
+       "ref": "2 Kings 20:8-11",
+       "choices": ["Josiah", "Uzziah", "Asa"]
       },
       {
        "id": "BT0897",
@@ -1413,6 +1538,7 @@ window.BIBLE_CARD_BANK = {
         ["chief", "cupbearer"]
        ],
        "ref": "2 Kings 18:17-19",
+       "choices": ["Nebuzaradan", "Naaman", "Sisera"],
        "note": "Rabshakeh is a title. Some translations say \"field commander.\""
       },
       {
@@ -1425,6 +1551,7 @@ window.BIBLE_CARD_BANK = {
         ["azariah"]
        ],
        "ref": "2 Chronicles 26:16-21",
+       "choices": ["Hezekiah", "Ahaz", "Manasseh"],
        "note": "2 Kings 15 calls this king Azariah."
       },
       {
@@ -1435,7 +1562,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["amon"]
        ],
-       "ref": "2 Kings 21:19-26"
+       "ref": "2 Kings 21:19-26",
+       "choices": ["Manasseh", "Hezekiah", "Jehoiakim"]
       },
       {
        "id": "BT0909",
@@ -1446,6 +1574,7 @@ window.BIBLE_CARD_BANK = {
         ["zedekiah"]
        ],
        "ref": "2 Kings 25:1-7",
+       "choices": ["Jehoiachin", "Jehoiakim", "Josiah"],
        "groups": ["bab-a"]
       }
      ]
@@ -1463,7 +1592,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["esther"]
        ],
-       "ref": "Esther 4:14-16; 7:3-6"
+       "ref": "Esther 4:14-16; 7:3-6",
+       "choices": ["Ruth", "Vashti", "Deborah"]
       },
       {
        "id": "BT0181",
@@ -1473,7 +1603,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["mordecai"]
        ],
-       "ref": "Esther 2:7"
+       "ref": "Esther 2:7",
+       "choices": ["Haman", "Boaz", "Nehemiah"]
       },
       {
        "id": "BT0533",
@@ -1485,6 +1616,7 @@ window.BIBLE_CARD_BANK = {
         ["sheshbazzar"]
        ],
        "ref": "Ezra 2:1-2; 3:8",
+       "choices": ["Nehemiah", "Ezra", "Daniel"],
        "note": "Ezra 1 names Sheshbazzar as the leader who brought the temple vessels back, so Sheshbazzar is accepted too."
       },
       {
@@ -1495,7 +1627,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ezra"]
        ],
-       "ref": "Ezra 7:6-10"
+       "ref": "Ezra 7:6-10",
+       "choices": ["Zerubbabel", "Daniel", "Haggai"]
       },
       {
        "id": "BT0541",
@@ -1506,6 +1639,7 @@ window.BIBLE_CARD_BANK = {
         ["nehemiah"]
        ],
        "ref": "Nehemiah 2:17-18; 6:15",
+       "choices": ["Ezra", "Zerubbabel", "Solomon"],
        "groups": ["neh-a"]
       },
       {
@@ -1517,6 +1651,7 @@ window.BIBLE_CARD_BANK = {
         ["sanballat"]
        ],
        "ref": "Nehemiah 4:1-3",
+       "choices": ["Haman", "Balak", "Goliath"],
        "groups": ["neh-a", "neh-b"]
       },
       {
@@ -1527,7 +1662,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["haman"]
        ],
-       "ref": "Esther 3:5-6"
+       "ref": "Esther 3:5-6",
+       "choices": ["Mordecai", "Sanballat", "Tobiah"]
       },
       {
        "id": "BT0553",
@@ -1537,7 +1673,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["purim"]
        ],
-       "ref": "Esther 9:26-28"
+       "ref": "Esther 9:26-28",
+       "choices": ["Passover", "Tabernacles", "Pentecost"]
       },
       {
        "id": "BT0953",
@@ -1547,7 +1684,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["cyrus"]
        ],
-       "ref": "Ezra 1:1-4"
+       "ref": "Ezra 1:1-4",
+       "choices": ["Darius", "Artaxerxes", "Nebuchadnezzar"]
       },
       {
        "id": "BT0957",
@@ -1558,6 +1696,7 @@ window.BIBLE_CARD_BANK = {
         ["artaxerxes"]
        ],
        "ref": "Ezra 7:1-8",
+       "choices": ["Cyrus", "Darius", "Ahasuerus"],
        "note": "Most scholars date this to Artaxerxes I. Some argue for Artaxerxes II."
       },
       {
@@ -1569,6 +1708,7 @@ window.BIBLE_CARD_BANK = {
         ["tobiah"]
        ],
        "ref": "Nehemiah 2:10",
+       "choices": ["Sanballat", "Geshem", "Haman"],
        "groups": ["neh-b"]
       },
       {
@@ -1579,7 +1719,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["hadassah"]
        ],
-       "ref": "Esther 2:7"
+       "ref": "Esther 2:7",
+       "choices": ["Deborah", "Naomi", "Hannah"]
       },
       {
        "id": "BT0969",
@@ -1589,7 +1730,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["abihail"]
        ],
-       "ref": "Esther 2:15"
+       "ref": "Esther 2:15",
+       "choices": ["Mordecai", "Jair", "Kish"]
       },
       {
        "id": "BT0973",
@@ -1602,6 +1744,7 @@ window.BIBLE_CARD_BANK = {
         ["assuerus"]
        ],
        "ref": "Esther 1:1",
+       "choices": ["Cyrus", "Darius", "Nebuchadnezzar"],
        "note": "Many translations and historians identify Ahasuerus as Xerxes I."
       }
      ]
@@ -1619,7 +1762,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["job"]
        ],
-       "ref": "Job 1-2"
+       "ref": "Job 1-2",
+       "choices": ["Jonah", "Noah", "Lot"]
       },
       {
        "id": "BT0189",
@@ -1632,6 +1776,7 @@ window.BIBLE_CARD_BANK = {
         ["psalter"]
        ],
        "ref": "Psalm 23:1",
+       "choices": ["Proverbs", "Isaiah", "Ecclesiastes"],
        "note": "Psalm numbers are one lower in Bibles that follow the Greek and Latin numbering."
       },
       {
@@ -1643,6 +1788,7 @@ window.BIBLE_CARD_BANK = {
         ["david"]
        ],
        "ref": "Psalm 3 superscription; 2 Samuel 23:1",
+       "choices": ["Samuel", "Isaiah", "Elijah"],
        "note": "The psalm headings link David to about half of the psalms. Scholars read those headings in different ways."
       },
       {
@@ -1653,7 +1799,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["proverbs"]
        ],
-       "ref": "Proverbs 1:1-7"
+       "ref": "Proverbs 1:1-7",
+       "choices": ["Psalms", "Job", "Lamentations"]
       },
       {
        "id": "BT0557",
@@ -1665,6 +1812,7 @@ window.BIBLE_CARD_BANK = {
         ["nineteen"]
        ],
        "ref": "Psalm 19:1",
+       "choices": ["Psalm 1", "Psalm 23", "Psalm 100"],
        "note": "Psalm numbers are one lower in Bibles that follow the Greek and Latin numbering."
       },
       {
@@ -1676,6 +1824,7 @@ window.BIBLE_CARD_BANK = {
         ["46"]
        ],
        "ref": "Psalm 46:1",
+       "choices": ["Psalm 23", "Psalm 51", "Psalm 91"],
        "note": "Psalm numbers are one lower in Bibles that follow the Greek and Latin numbering."
       },
       {
@@ -1686,7 +1835,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["eliphaz"]
        ],
-       "ref": "Job 2:11"
+       "ref": "Job 2:11",
+       "choices": ["Bildad", "Zophar", "Elihu"]
       },
       {
        "id": "BT0981",
@@ -1696,7 +1846,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["bildad"]
        ],
-       "ref": "Job 2:11"
+       "ref": "Job 2:11",
+       "choices": ["Eliphaz", "Zophar", "Elihu"]
       },
       {
        "id": "BT0985",
@@ -1706,7 +1857,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["zophar"]
        ],
-       "ref": "Job 2:11"
+       "ref": "Job 2:11",
+       "choices": ["Eliphaz", "Bildad", "Elihu"]
       },
       {
        "id": "BT0989",
@@ -1716,7 +1868,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["elihu"]
        ],
-       "ref": "Job 32:2-5"
+       "ref": "Job 32:2-5",
+       "choices": ["Eliphaz", "Bildad", "Zophar"]
       },
       {
        "id": "BT0993",
@@ -1728,6 +1881,7 @@ window.BIBLE_CARD_BANK = {
         ["ninety"]
        ],
        "ref": "Psalm 90 superscription",
+       "choices": ["Psalm 1", "Psalm 51", "Psalm 72"],
        "note": "Psalm numbers are one lower in Bibles that follow the Greek and Latin numbering."
       },
       {
@@ -1739,6 +1893,7 @@ window.BIBLE_CARD_BANK = {
         ["119"]
        ],
        "ref": "Psalm 119",
+       "choices": ["Psalm 117", "Psalm 150", "Psalm 23"],
        "note": "Psalm numbers are one lower in Bibles that follow the Greek and Latin numbering."
       }
      ]
@@ -1758,6 +1913,7 @@ window.BIBLE_CARD_BANK = {
         ["jonas"]
        ],
        "ref": "Jonah 1:17",
+       "choices": ["Job", "Daniel", "Peter"],
        "groups": ["jonah"]
       },
       {
@@ -1769,6 +1925,7 @@ window.BIBLE_CARD_BANK = {
         ["nineveh"]
        ],
        "ref": "Jonah 1:2",
+       "choices": ["Babylon", "Tarshish", "Jerusalem"],
        "groups": ["jonah"]
       },
       {
@@ -1779,7 +1936,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["daniel"]
        ],
-       "ref": "Daniel 6:16"
+       "ref": "Daniel 6:16",
+       "choices": ["David", "Jonah", "Samson"]
       },
       {
        "id": "BT0169",
@@ -1789,7 +1947,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["daniel"]
        ],
-       "ref": "Daniel 2:26-28"
+       "ref": "Daniel 2:26-28",
+       "choices": ["Joseph", "Ezekiel", "Jeremiah"]
       },
       {
        "id": "BT0173",
@@ -1800,7 +1959,8 @@ window.BIBLE_CARD_BANK = {
         ["shadrach", "meshach", "abednego"],
         ["hananiah", "mishael", "azariah"]
        ],
-       "ref": "Daniel 3:19-25"
+       "ref": "Daniel 3:19-25",
+       "choices": ["Peter, James, and John", "Eliphaz, Bildad, and Zophar", "Shem, Ham, and Japheth"]
       },
       {
        "id": "BT0565",
@@ -1810,7 +1970,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["isaiah"]
        ],
-       "ref": "Isaiah 6:1"
+       "ref": "Isaiah 6:1",
+       "choices": ["Ezekiel", "Jeremiah", "Daniel"]
       },
       {
        "id": "BT0569",
@@ -1820,7 +1981,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jeremiah"]
        ],
-       "ref": "Jeremiah 32:6-15"
+       "ref": "Jeremiah 32:6-15",
+       "choices": ["Isaiah", "Ezekiel", "Hosea"]
       },
       {
        "id": "BT0573",
@@ -1830,7 +1992,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ezekiel"]
        ],
-       "ref": "Ezekiel 37:1-14"
+       "ref": "Ezekiel 37:1-14",
+       "choices": ["Isaiah", "Daniel", "Joel"]
       },
       {
        "id": "BT0577",
@@ -1840,7 +2003,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["hosea"]
        ],
-       "ref": "Hosea 1:2-3"
+       "ref": "Hosea 1:2-3",
+       "choices": ["Amos", "Micah", "Isaiah"]
       },
       {
        "id": "BT0581",
@@ -1850,7 +2014,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["amos"]
        ],
-       "ref": "Amos 5:24"
+       "ref": "Amos 5:24",
+       "choices": ["Micah", "Isaiah", "Hosea"]
       },
       {
        "id": "BT0585",
@@ -1861,6 +2026,7 @@ window.BIBLE_CARD_BANK = {
         ["jonah"]
        ],
        "ref": "Jonah 1:1-3",
+       "choices": ["Nahum", "Obadiah", "Amos"],
        "groups": ["jonah"]
       },
       {
@@ -1871,7 +2037,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["micah"]
        ],
-       "ref": "Micah 5:2"
+       "ref": "Micah 5:2",
+       "choices": ["Isaiah", "Malachi", "Zechariah"]
       },
       {
        "id": "BT0593",
@@ -1882,6 +2049,7 @@ window.BIBLE_CARD_BANK = {
         ["habakkuk"]
        ],
        "ref": "Habakkuk 2:4",
+       "choices": ["Haggai", "Zephaniah", "Nahum"],
        "note": "Some translations say \"faithfulness\" where others say \"faith.\""
       },
       {
@@ -1895,6 +2063,7 @@ window.BIBLE_CARD_BANK = {
         ["zachariah"]
        ],
        "ref": "Haggai 1:7-8",
+       "choices": ["Jonah", "Amos", "Hosea"],
        "note": "Zechariah also urged the rebuilding (Ezra 5:1), so Zechariah is accepted too."
       },
       {
@@ -1907,7 +2076,8 @@ window.BIBLE_CARD_BANK = {
         ["zachariah"],
         ["zacharias"]
        ],
-       "ref": "Zechariah 5:1-2"
+       "ref": "Zechariah 5:1-2",
+       "choices": ["Daniel", "Amos", "Joel"]
       },
       {
        "id": "BT0605",
@@ -1917,7 +2087,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["malachi"]
        ],
-       "ref": "Malachi 3:8"
+       "ref": "Malachi 3:8",
+       "choices": ["Haggai", "Micah", "Amos"]
       },
       {
        "id": "BT0913",
@@ -1929,6 +2100,7 @@ window.BIBLE_CARD_BANK = {
         ["nebuzar", "adan"]
        ],
        "ref": "Jeremiah 40:1-4",
+       "choices": ["Nebuchadnezzar", "Gedaliah", "Belshazzar"],
        "groups": ["bab-b"]
       },
       {
@@ -1939,7 +2111,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["baruch"]
        ],
-       "ref": "Jeremiah 36:4"
+       "ref": "Jeremiah 36:4",
+       "choices": ["Ezra", "Shaphan", "Gedaliah"]
       },
       {
        "id": "BT0921",
@@ -1951,6 +2124,7 @@ window.BIBLE_CARD_BANK = {
         ["ebed", "melech"]
        ],
        "ref": "Jeremiah 38:7-13",
+       "choices": ["Baruch", "Gedaliah", "Nebuzaradan"],
        "note": "Translations say Ethiopian or Cushite."
       },
       {
@@ -1961,7 +2135,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["isaiah"]
        ],
-       "ref": "Isaiah 8:1-3"
+       "ref": "Isaiah 8:1-3",
+       "choices": ["Hosea", "Jeremiah", "Ezekiel"]
       },
       {
        "id": "BT0929",
@@ -1976,6 +2151,7 @@ window.BIBLE_CARD_BANK = {
         ["not", "pitied"]
        ],
        "ref": "Hosea 1:6",
+       "choices": ["Lo-ammi", "Jezreel", "Gomer"],
        "note": "Some translations print the meaning of the name, such as No Mercy or Not Loved."
       },
       {
@@ -1988,6 +2164,7 @@ window.BIBLE_CARD_BANK = {
         ["lo", "ammi"]
        ],
        "ref": "Hosea 1:8-9",
+       "choices": ["Jezreel", "Lo-ruhamah", "Ichabod"],
        "note": "Some translations print the meaning in place of the name."
       },
       {
@@ -1999,6 +2176,7 @@ window.BIBLE_CARD_BANK = {
         ["amos"]
        ],
        "ref": "Amos 7:7-8",
+       "choices": ["Hosea", "Jonah", "Obadiah"],
        "groups": ["amos"]
       },
       {
@@ -2010,6 +2188,7 @@ window.BIBLE_CARD_BANK = {
         ["amos"]
        ],
        "ref": "Amos 7:1-8",
+       "choices": ["Joel", "Hosea", "Nahum"],
        "groups": ["amos"]
       },
       {
@@ -2022,7 +2201,8 @@ window.BIBLE_CARD_BANK = {
         ["zachariah"],
         ["zacharias"]
        ],
-       "ref": "Zechariah 1:18-21"
+       "ref": "Zechariah 1:18-21",
+       "choices": ["Daniel", "Ezekiel", "Haggai"]
       },
       {
        "id": "BT0949",
@@ -2034,6 +2214,7 @@ window.BIBLE_CARD_BANK = {
         ["jeshua"]
        ],
        "ref": "Zechariah 3:1-5",
+       "choices": ["Aaron", "Zadok", "Hilkiah"],
        "note": "Ezra and Nehemiah spell the name Jeshua."
       }
      ]
@@ -2057,7 +2238,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["bethlehem"]
        ],
-       "ref": "Matthew 2:1"
+       "ref": "Matthew 2:1",
+       "choices": ["Nazareth", "Jerusalem", "Capernaum"]
       },
       {
        "id": "BT0205",
@@ -2068,6 +2250,7 @@ window.BIBLE_CARD_BANK = {
         ["mary"]
        ],
        "ref": "Luke 1:30-31",
+       "choices": ["Elizabeth", "Martha", "Anna"],
        "groups": ["mary"]
       },
       {
@@ -2078,7 +2261,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["joseph"]
        ],
-       "ref": "Matthew 1:18-24"
+       "ref": "Matthew 1:18-24",
+       "choices": ["Zechariah", "Simeon", "Cleopas"]
       },
       {
        "id": "BT0213",
@@ -2089,6 +2273,7 @@ window.BIBLE_CARD_BANK = {
         ["gabriel"]
        ],
        "ref": "Luke 1:26-31",
+       "choices": ["Michael", "Simeon", "John the Baptist"],
        "groups": ["mary"]
       },
       {
@@ -2102,7 +2287,8 @@ window.BIBLE_CARD_BANK = {
         ["baptist"],
         ["john", "baptizer"]
        ],
-       "ref": "Matthew 3:13-17"
+       "ref": "Matthew 3:13-17",
+       "choices": ["Peter", "Andrew", "Elijah"]
       },
       {
        "id": "BT0221",
@@ -2112,7 +2298,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["jordan"]
        ],
-       "ref": "Mark 1:9"
+       "ref": "Mark 1:9",
+       "choices": ["Nile River", "Euphrates River", "Tigris River"]
       },
       {
        "id": "BT0225",
@@ -2123,7 +2310,8 @@ window.BIBLE_CARD_BANK = {
         ["twelve"],
         ["12"]
        ],
-       "ref": "Mark 3:13-19"
+       "ref": "Mark 3:13-19",
+       "choices": ["Seven", "Ten", "Forty"]
       },
       {
        "id": "BT0237",
@@ -2135,6 +2323,7 @@ window.BIBLE_CARD_BANK = {
         ["levi"]
        ],
        "ref": "Matthew 9:9",
+       "choices": ["Peter", "Andrew", "Thomas"],
        "note": "Mark and Luke call this tax collector Levi."
       },
       {
@@ -2145,7 +2334,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["andrew"]
        ],
-       "ref": "John 1:40"
+       "ref": "John 1:40",
+       "choices": ["James", "John", "Philip"]
       },
       {
        "id": "BT0245",
@@ -2159,6 +2349,7 @@ window.BIBLE_CARD_BANK = {
         ["zacchaeous"]
        ],
        "ref": "Luke 19:1-4",
+       "choices": ["Nicodemus", "Bartimaeus", "Lazarus"],
        "note": "Most modern translations say sycamore fig."
       },
       {
@@ -2169,7 +2360,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["lazarus"]
        ],
-       "ref": "John 11:17,43-44"
+       "ref": "John 11:17,43-44",
+       "choices": ["Jairus", "Bartimaeus", "Stephen"]
       },
       {
        "id": "BT0253",
@@ -2179,7 +2371,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["mary", "martha"]
        ],
-       "ref": "John 11:1-2"
+       "ref": "John 11:1-2",
+       "choices": ["Mary and Elizabeth", "Ruth and Naomi", "Rachel and Leah"]
       },
       {
        "id": "BT0257",
@@ -2189,7 +2382,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["cana"]
        ],
-       "ref": "John 2:1-11"
+       "ref": "John 2:1-11",
+       "choices": ["Capernaum", "Bethany", "Nazareth"]
       },
       {
        "id": "BT0261",
@@ -2205,7 +2399,8 @@ window.BIBLE_CARD_BANK = {
         ["loafs", "fishes"],
         ["loaf", "fish"]
        ],
-       "ref": "Matthew 14:17-21"
+       "ref": "Matthew 14:17-21",
+       "choices": ["Seven loaves and a few fish", "Two loaves and five fish", "Twelve baskets of bread"]
       },
       {
        "id": "BT0265",
@@ -2219,6 +2414,7 @@ window.BIBLE_CARD_BANK = {
         ["kinneret"]
        ],
        "ref": "Matthew 14:24-26",
+       "choices": ["Dead Sea", "Red Sea", "Mediterranean Sea"],
        "note": "John calls it the Sea of Tiberias, and Luke calls it the Lake of Gennesaret."
       },
       {
@@ -2231,7 +2427,8 @@ window.BIBLE_CARD_BANK = {
         ["simon"],
         ["cephas"]
        ],
-       "ref": "Matthew 14:28-31"
+       "ref": "Matthew 14:28-31",
+       "choices": ["John", "James", "Andrew"]
       },
       {
        "id": "BT0273",
@@ -2246,6 +2443,7 @@ window.BIBLE_CARD_BANK = {
         ["model", "prayer"]
        ],
        "ref": "Matthew 6:9-13",
+       "choices": ["The Beatitudes", "The Magnificat", "The Great Commission"],
        "note": "The wording changes by translation, for example \"Our Father which art in heaven.\""
       },
       {
@@ -2257,7 +2455,8 @@ window.BIBLE_CARD_BANK = {
         ["prodigal"],
         ["lost", "son"]
        ],
-       "ref": "Luke 15:11-32"
+       "ref": "Luke 15:11-32",
+       "choices": ["The good Samaritan", "The lost sheep", "The sower"]
       },
       {
        "id": "BT0281",
@@ -2268,6 +2467,7 @@ window.BIBLE_CARD_BANK = {
         ["samaritan"]
        ],
        "ref": "Luke 10:30-37",
+       "choices": ["The prodigal son", "The sower", "The rich man and Lazarus"],
        "groups": ["samaritan"]
       },
       {
@@ -2282,6 +2482,7 @@ window.BIBLE_CARD_BANK = {
         ["zachary"]
        ],
        "ref": "Luke 1:13",
+       "choices": ["Joseph", "Simeon", "Zebedee"],
        "note": "The King James Version spells the name Zacharias."
       },
       {
@@ -2293,7 +2494,8 @@ window.BIBLE_CARD_BANK = {
         ["elizabeth"],
         ["elisabeth"]
        ],
-       "ref": "Luke 1:57-60"
+       "ref": "Luke 1:57-60",
+       "choices": ["Mary", "Anna", "Martha"]
       },
       {
        "id": "BT0613",
@@ -2303,7 +2505,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["matthew"]
        ],
-       "ref": "Matthew 1:1-17"
+       "ref": "Matthew 1:1-17",
+       "choices": ["Mark", "Luke", "John"]
       },
       {
        "id": "BT0617",
@@ -2313,7 +2516,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["john"]
        ],
-       "ref": "John 1:1"
+       "ref": "John 1:1",
+       "choices": ["Matthew", "Mark", "Luke"]
       },
       {
        "id": "BT0621",
@@ -2323,7 +2527,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["mark"]
        ],
-       "ref": "Mark 1:1-4"
+       "ref": "Mark 1:1-4",
+       "choices": ["Matthew", "Luke"]
       },
       {
        "id": "BT0625",
@@ -2334,6 +2539,7 @@ window.BIBLE_CARD_BANK = {
         ["luke"]
        ],
        "ref": "Luke 10:25-37",
+       "choices": ["Matthew", "Mark", "John"],
        "groups": ["samaritan"]
       },
       {
@@ -2344,7 +2550,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["nicodemus"]
        ],
-       "ref": "John 3:1-2"
+       "ref": "John 3:1-2",
+       "choices": ["Zacchaeus", "Joseph of Arimathea", "Gamaliel"]
       },
       {
        "id": "BT0637",
@@ -2355,7 +2562,8 @@ window.BIBLE_CARD_BANK = {
         ["jacob"],
         ["jacobs"]
        ],
-       "ref": "John 4:6"
+       "ref": "John 4:6",
+       "choices": ["Joseph's well", "David's well", "Isaac's well"]
       },
       {
        "id": "BT0641",
@@ -2368,6 +2576,7 @@ window.BIBLE_CARD_BANK = {
         ["bethsaida"]
        ],
        "ref": "John 5:2-9",
+       "choices": ["Siloam", "Gihon", "Kidron"],
        "note": "Some manuscripts and translations spell it Bethzatha or Bethsaida."
       },
       {
@@ -2378,7 +2587,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["siloam"]
        ],
-       "ref": "John 9:7"
+       "ref": "John 9:7",
+       "choices": ["Bethesda", "Gihon", "Kidron"]
       },
       {
        "id": "BT0725",
@@ -2388,7 +2598,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["zebedee"]
        ],
-       "ref": "Mark 1:19-20"
+       "ref": "Mark 1:19-20",
+       "choices": ["Alphaeus", "Jonah", "Zechariah"]
       },
       {
        "id": "BT0729",
@@ -2399,7 +2610,8 @@ window.BIBLE_CARD_BANK = {
         ["thunder"],
         ["boanerges"]
        ],
-       "ref": "Mark 3:17"
+       "ref": "Mark 3:17",
+       "choices": ["Fishers of Men", "The Rock", "Sons of Encouragement"]
       },
       {
        "id": "BT0733",
@@ -2410,6 +2622,7 @@ window.BIBLE_CARD_BANK = {
         ["thomas"]
        ],
        "ref": "John 11:16",
+       "choices": ["Bartholomew", "Thaddaeus", "Matthew"],
        "note": "Didymus is Greek for twin, and some translations print \"the Twin.\""
       }
      ]
@@ -2429,7 +2642,8 @@ window.BIBLE_CARD_BANK = {
         ["simon"],
         ["cephas"]
        ],
-       "ref": "Luke 22:54-62"
+       "ref": "Luke 22:54-62",
+       "choices": ["Judas Iscariot", "Thomas", "John"]
       },
       {
        "id": "BT0233",
@@ -2439,7 +2653,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["judas"]
        ],
-       "ref": "Matthew 26:14-16"
+       "ref": "Matthew 26:14-16",
+       "choices": ["Peter", "Thomas", "Matthew"]
       },
       {
        "id": "BT0285",
@@ -2454,6 +2669,7 @@ window.BIBLE_CARD_BANK = {
         ["donkeys"]
        ],
        "ref": "Matthew 21:1-7",
+       "choices": ["Horse", "Camel", "Ox"],
        "note": "Matthew mentions a donkey and a colt. Mark, Luke and John mention one young donkey."
       },
       {
@@ -2466,7 +2682,8 @@ window.BIBLE_CARD_BANK = {
         ["mount", "olives"],
         ["olivet"]
        ],
-       "ref": "Matthew 26:36"
+       "ref": "Matthew 26:36",
+       "choices": ["Golgotha", "Bethany", "The temple courts"]
       },
       {
        "id": "BT0293",
@@ -2476,7 +2693,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["pilate"]
        ],
-       "ref": "Mark 15:15"
+       "ref": "Mark 15:15",
+       "choices": ["Herod Antipas", "Caiaphas", "Caesar Augustus"]
       },
       {
        "id": "BT0297",
@@ -2489,6 +2707,7 @@ window.BIBLE_CARD_BANK = {
         ["skull"]
        ],
        "ref": "Mark 15:22",
+       "choices": ["Gethsemane", "Bethany", "Mount Sinai"],
        "note": "The King James Version of Luke 23:33 uses the Latin name, Calvary."
       },
       {
@@ -2501,7 +2720,8 @@ window.BIBLE_CARD_BANK = {
         ["joseph"],
         ["arimathea"]
        ],
-       "ref": "Mark 15:43"
+       "ref": "Mark 15:43",
+       "choices": ["Nicodemus", "Simon of Cyrene", "Peter"]
       },
       {
        "id": "BT0305",
@@ -2514,7 +2734,8 @@ window.BIBLE_CARD_BANK = {
         ["3"],
         ["three"]
        ],
-       "ref": "Luke 24:6-7"
+       "ref": "Luke 24:6-7",
+       "choices": ["The second day", "The seventh day", "The fortieth day"]
       },
       {
        "id": "BT0309",
@@ -2527,6 +2748,7 @@ window.BIBLE_CARD_BANK = {
         ["mary", "magdala"]
        ],
        "ref": "John 20:14-18",
+       "choices": ["Peter", "Mary the mother of Jesus", "Thomas"],
        "note": "The four Gospels describe the first appearances differently. This question follows John."
       },
       {
@@ -2538,7 +2760,8 @@ window.BIBLE_CARD_BANK = {
         ["thomas"],
         ["didymus"]
        ],
-       "ref": "John 20:24-29"
+       "ref": "John 20:24-29",
+       "choices": ["Peter", "Philip", "Andrew"]
       },
       {
        "id": "BT0633",
@@ -2548,7 +2771,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["nicodemus"]
        ],
-       "ref": "John 19:39"
+       "ref": "John 19:39",
+       "choices": ["Gamaliel", "Caiaphas", "Simon the Pharisee"]
       }
      ]
     },
@@ -2566,6 +2790,7 @@ window.BIBLE_CARD_BANK = {
         ["pentecost"]
        ],
        "ref": "Acts 2:1-4",
+       "choices": ["Passover", "The Transfiguration", "The Ascension"],
        "groups": ["pentecost"]
       },
       {
@@ -2579,6 +2804,7 @@ window.BIBLE_CARD_BANK = {
         ["cephas"]
        ],
        "ref": "Acts 2:14",
+       "choices": ["Paul", "Stephen", "James"],
        "groups": ["pentecost"]
       },
       {
@@ -2590,7 +2816,8 @@ window.BIBLE_CARD_BANK = {
         ["stephen"],
         ["steven"]
        ],
-       "ref": "Acts 7:54-60"
+       "ref": "Acts 7:54-60",
+       "choices": ["James", "Paul", "Barnabas"]
       },
       {
        "id": "BT0329",
@@ -2601,6 +2828,7 @@ window.BIBLE_CARD_BANK = {
         ["saul"]
        ],
        "ref": "Acts 13:9",
+       "choices": ["Simon", "Silas", "Barnabas"],
        "groups": ["saul-paul"],
        "note": "Acts 13:9 says Saul was also called Paul. It does not describe a change of name."
       },
@@ -2613,6 +2841,7 @@ window.BIBLE_CARD_BANK = {
         ["damascus"]
        ],
        "ref": "Acts 9:3-6",
+       "choices": ["Road to Emmaus", "Road to Jericho", "Road to Bethlehem"],
        "groups": ["saul-paul"]
       },
       {
@@ -2623,7 +2852,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["barnabas"]
        ],
-       "ref": "Acts 13:2-4"
+       "ref": "Acts 13:2-4",
+       "choices": ["Silas", "Timothy", "Luke"]
       },
       {
        "id": "BT0341",
@@ -2634,6 +2864,7 @@ window.BIBLE_CARD_BANK = {
         ["luke"]
        ],
        "ref": "Colossians 4:14; Luke 1:1-4; Acts 1:1",
+       "choices": ["Mark", "Titus", "Timothy"],
        "note": "Colossians calls Luke a physician. Linking him to the Gospel and Acts comes from early church tradition."
       },
       {
@@ -2644,7 +2875,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["acts"]
        ],
-       "ref": "Acts 1:1-9"
+       "ref": "Acts 1:1-9",
+       "choices": ["Romans", "Hebrews", "Revelation"]
       },
       {
        "id": "BT0649",
@@ -2654,7 +2886,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["cornelius"]
        ],
-       "ref": "Acts 10:1-6"
+       "ref": "Acts 10:1-6",
+       "choices": ["Julius", "Felix", "Sergius Paulus"]
       },
       {
        "id": "BT0653",
@@ -2665,6 +2898,7 @@ window.BIBLE_CARD_BANK = {
         ["lydia"]
        ],
        "ref": "Acts 16:14-15",
+       "choices": ["Priscilla", "Dorcas", "Phoebe"],
        "note": "Lydia came from Thyatira in Asia Minor. She believed in Philippi, which is in Europe."
       },
       {
@@ -2676,6 +2910,7 @@ window.BIBLE_CARD_BANK = {
         ["purple"]
        ],
        "ref": "Acts 16:14",
+       "choices": ["Tentmaker", "Fisher", "Tax collector"],
        "note": "Translations say purple cloth, purple goods, or simply purple."
       },
       {
@@ -2687,6 +2922,7 @@ window.BIBLE_CARD_BANK = {
         ["apollos"]
        ],
        "ref": "Acts 18:24-26",
+       "choices": ["Timothy", "Silas", "Barnabas"],
        "groups": ["apollos"]
       },
       {
@@ -2697,7 +2933,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["timothy"]
        ],
-       "ref": "Acts 16:1"
+       "ref": "Acts 16:1",
+       "choices": ["Titus", "Silas", "John Mark"]
       },
       {
        "id": "BT0677",
@@ -2709,6 +2946,7 @@ window.BIBLE_CARD_BANK = {
         ["prisca", "aquila"]
        ],
        "ref": "Acts 18:26",
+       "choices": ["Ananias and Sapphira", "Zechariah and Elizabeth", "Andronicus and Junia"],
        "groups": ["apollos"]
       },
       {
@@ -2719,7 +2957,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["eutychus"]
        ],
-       "ref": "Acts 20:9-10"
+       "ref": "Acts 20:9-10",
+       "choices": ["Tychicus", "Trophimus", "Epaphroditus"]
       },
       {
        "id": "BT0685",
@@ -2731,6 +2970,7 @@ window.BIBLE_CARD_BANK = {
         ["melita"]
        ],
        "ref": "Acts 28:1",
+       "choices": ["Crete", "Cyprus", "Patmos"],
        "note": "The King James Version calls the island Melita."
       }
      ]
@@ -2748,7 +2988,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["paul"]
        ],
-       "ref": "1 Corinthians 1:1"
+       "ref": "1 Corinthians 1:1",
+       "choices": ["Peter", "John", "James"]
       },
       {
        "id": "BT0353",
@@ -2760,7 +3001,8 @@ window.BIBLE_CARD_BANK = {
         ["revelations"],
         ["apocalypse"]
        ],
-       "ref": "Revelation 22:18-21"
+       "ref": "Revelation 22:18-21",
+       "choices": ["Jude", "Acts", "Hebrews"]
       },
       {
        "id": "BT0669",
@@ -2770,7 +3012,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["eunice"]
        ],
-       "ref": "2 Timothy 1:5"
+       "ref": "2 Timothy 1:5",
+       "choices": ["Lois", "Lydia", "Priscilla"]
       },
       {
        "id": "BT0673",
@@ -2780,7 +3023,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["lois"]
        ],
-       "ref": "2 Timothy 1:5"
+       "ref": "2 Timothy 1:5",
+       "choices": ["Eunice", "Phoebe", "Dorcas"]
       },
       {
        "id": "BT0689",
@@ -2790,7 +3034,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["galatians"]
        ],
-       "ref": "Galatians 5:22-23"
+       "ref": "Galatians 5:22-23",
+       "choices": ["Ephesians", "Romans", "Philippians"]
       },
       {
        "id": "BT0693",
@@ -2800,7 +3045,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["ephesians"]
        ],
-       "ref": "Ephesians 6:10-17"
+       "ref": "Ephesians 6:10-17",
+       "choices": ["Galatians", "Colossians", "Romans"]
       },
       {
        "id": "BT0697",
@@ -2815,6 +3061,7 @@ window.BIBLE_CARD_BANK = {
         ["one", "corinthians"]
        ],
        "ref": "1 Corinthians 13:4",
+       "choices": ["2 Corinthians", "Romans", "1 John"],
        "note": "The King James Version reads \"Charity suffereth long.\""
       },
       {
@@ -2825,7 +3072,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["james"]
        ],
-       "ref": "James 2:17"
+       "ref": "James 2:17",
+       "choices": ["Romans", "Galatians", "Hebrews"]
       },
       {
        "id": "BT0705",
@@ -2835,7 +3083,8 @@ window.BIBLE_CARD_BANK = {
        "accept": [
         ["hebrews"]
        ],
-       "ref": "Hebrews 4:14"
+       "ref": "Hebrews 4:14",
+       "choices": ["Romans", "James", "1 Peter"]
       },
       {
        "id": "BT0709",
@@ -2848,6 +3097,7 @@ window.BIBLE_CARD_BANK = {
         ["apocalypse"]
        ],
        "ref": "Revelation 1:11",
+       "choices": ["Acts", "Hebrews", "Jude"],
        "groups": ["rev-a", "rev-b"]
       },
       {
@@ -2859,6 +3109,7 @@ window.BIBLE_CARD_BANK = {
         ["laodicea"]
        ],
        "ref": "Revelation 3:14-16",
+       "choices": ["Ephesus", "Smyrna", "Philadelphia"],
        "groups": ["rev-a"]
       },
       {
@@ -2870,6 +3121,7 @@ window.BIBLE_CARD_BANK = {
         ["ephesus"]
        ],
        "ref": "Revelation 2:1-4",
+       "choices": ["Laodicea", "Sardis", "Pergamum"],
        "groups": ["rev-b"]
       },
       {
@@ -2881,6 +3133,7 @@ window.BIBLE_CARD_BANK = {
         ["john"]
        ],
        "ref": "Revelation 1:1,9",
+       "choices": ["Peter", "Paul", "Daniel"],
        "note": "The book names its writer only as John. Tradition identifies him as the apostle."
       }
      ]
