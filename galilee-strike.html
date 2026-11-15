@@ -623,17 +623,56 @@ function fadeTheme(to,ms,then){
   clearInterval(themeFade); const a=themeEl(), from=a.volume, t0=performance.now();
   themeFade=setInterval(()=>{ const k=Math.min(1,(performance.now()-t0)/ms); a.volume=Math.max(0,Math.min(1,from+(to-from)*k)); if(k>=1){ clearInterval(themeFade); if(then) then(); } },50);
 }
-function introMusic(){ themeWanted=true; if(!soundOn) return; try{ const a=themeEl(); if(a.paused){ a.volume=0; const p=a.play(); if(p&&p.catch) p.catch(()=>{}); } fadeTheme(.8,700); }catch(e){} }
+function introMusic(){ themeWanted=true; if(!soundOn) return; try{ const a=themeEl();
+  if(themeGain&&AC){ clearInterval(themeFade); const t=AC.currentTime; themeGain.gain.cancelScheduledValues(t); themeGain.gain.setValueAtTime(a.paused?.0001:themeGain.gain.value,t); themeGain.gain.linearRampToValueAtTime(1,t+1.5); if(AC.state==="suspended") AC.resume(); }
+  if(a.paused){ a.volume=themeGain?.8:0; const p=a.play(); if(p&&p.catch) p.catch(()=>{}); } fadeTheme(.8,700); }catch(e){} }
 /* Phones only let sound start from a touch. Any tap, click or key press while the theme should be playing starts it. */
 function nudgeMusic(){ if(!themeWanted||!soundOn||$("pop").open) return; try{ const a=themeEl(); if(a.paused){ const p=a.play(); if(p&&p.catch) p.catch(()=>{}); fadeTheme(.8,700); } }catch(e){} }
 ["touchend","click","keydown"].forEach(ev=>document.addEventListener(ev,nudgeMusic,true));
-function stopMusic(){ themeWanted=false; if(!theme) return; fadeTheme(0,1500,()=>{ try{ theme.pause(); }catch(e){} }); }
+/* Phones ignore the volume setting on a music file, so a volume fade does nothing there and the theme used to cut off.
+   When the game starts, the theme is passed through the same sound engine as the game sounds, where a fade works on every device. */
+let themeGain=null, themeBusTried=false;
+function themeBus(){
+  if(themeGain||themeBusTried||!theme) return themeGain;
+  if(!/^https?:$/.test(location.protocol)){ themeBusTried=true; return null; }     /* a file opened straight from a folder cannot be routed */
+  const ac=audio(); if(!ac) return null;
+  themeBusTried=true;
+  try{ const src=ac.createMediaElementSource(theme); themeGain=ac.createGain(); themeGain.gain.value=1; src.connect(themeGain); themeGain.connect(ac.destination); }catch(e){ themeGain=null; }
+  return themeGain;
+}
+const MUSIC_OUT=3200;      /* how long the theme takes to fade out when the game starts, in milliseconds */
+function stopMusic(){
+  themeWanted=false; if(!theme) return;
+  const done=()=>{ try{ theme.pause(); if(themeGain&&AC) themeGain.gain.setValueAtTime(1,AC.currentTime); }catch(e){} };
+  const g=themeBus();
+  if(g&&AC){ clearInterval(themeFade); try{ const t=AC.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(1,t); g.gain.linearRampToValueAtTime(.0001,t+MUSIC_OUT/1000); }catch(e){}
+    themeFade=setInterval(()=>{ clearInterval(themeFade); done(); },MUSIC_OUT+60); }
+  else fadeTheme(0,MUSIC_OUT,done);
+}
+/* The game sounds (ocean, missiles, splashes, explosions) fade in while the theme fades out. */
+function gameSoundIn(){
+  if(!AC||!master) return;
+  try{ const t=AC.currentTime; master.gain.cancelScheduledValues(t); master.gain.setValueAtTime(.0001,t); master.gain.setValueAtTime(.04,t+.6); master.gain.exponentialRampToValueAtTime(.9,t+4); }catch(e){}
+}
+/* iPhones mute game sounds when the ring switch is on silent, even though a music file still plays. Newer iPhones let the page
+   ask to be treated as media. Older ones need a silent sound file looping while the game is open. */
+const IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+let keeper=null;
+function keepAudible(on){
+  try{ if(navigator.audioSession){ navigator.audioSession.type="playback"; return; } }catch(e){}
+  if(!IOS) return;
+  try{
+    if(!on){ if(keeper) keeper.pause(); return; }
+    if(!keeper){ keeper=new Audio("data:audio/wav;base64,UklGRsQPAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YaAPAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA"); keeper.loop=true; keeper.setAttribute("playsinline",""); }
+    const p=keeper.play(); if(p&&p.catch) p.catch(()=>{});
+  }catch(e){}
+}
 function setSound(on){
   soundOn=on; const b=$("soundBtn"), b2=$("soundBtn2");
   b.setAttribute("aria-pressed",String(on)); b.textContent="Sound: "+(on?"On":"Off");
   b2.setAttribute("aria-pressed",String(on)); b2.setAttribute("aria-label",on?"Sound is on. Turn sound off":"Sound is off. Turn sound on"); b2.classList.toggle("off",!on);
-  if(!on){ ocean(false); if(theme) fadeTheme(0,200,()=>{ try{ theme.pause(); }catch(e){} }); }
-  else if($("pop").open) ocean(true); else if(themeWanted) introMusic();
+  if(!on){ ocean(false); keepAudible(false); if(theme) fadeTheme(0,200,()=>{ try{ theme.pause(); }catch(e){} }); }
+  else if($("pop").open){ audio(); keepAudible(true); ocean(true); } else if(themeWanted) introMusic();
 }
 const sfx={
   launch(){ /* missile: ignition pop, then a rocket roar and hiss that last the whole flight */
@@ -1177,7 +1216,7 @@ function show(id){
   G3.run(id==="play");
 }
 function start(){
-  audio(); stopMusic(); ocean(true);
+  audio(); keepAudible(true); gameSoundIn(); stopMusic(); ocean(true);
   const deck=buildDeck(PLAN.pool,PLAN.count,PLAN.mixed);
   S={phase:"question",enemy:makeFleet(),me:makeFleet(),deck,total:deck.length,asked:0,correct:0,missed:[],ai:[],focus:24};
   show("play"); buildBoards(); hud(); nextQuestion();
@@ -1216,7 +1255,7 @@ function finish(won){
   say($("endH").textContent+" Final score "+pct+" percent. Your rank is "+rank+".");
 }
 function menu(){ show("start"); }
-$("pop").addEventListener("close",()=>{ G3.run(false); ocean(false); introMusic(); if(S) S.phase="menu"; showMissedBtn(); document.body.style.minHeight=""; const b=document.querySelector("#startForm .btn"); if(b) b.focus({preventScroll:true}); });
+$("pop").addEventListener("close",()=>{ G3.run(false); ocean(false); keepAudible(false); introMusic(); if(S) S.phase="menu"; showMissedBtn(); document.body.style.minHeight=""; const b=document.querySelector("#startForm .btn"); if(b) b.focus({preventScroll:true}); });
 if(window.ResizeObserver) new ResizeObserver(()=>{ const pop=$("pop"); document.body.style.minHeight=pop.open?(pop.offsetHeight+24)+"px":""; }).observe($("pop"));
 
 /* ---------- intro: each direction fades in and out slowly, then the title appears ---------- */

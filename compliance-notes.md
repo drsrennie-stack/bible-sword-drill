@@ -132,3 +132,10 @@ Not tested: a real phone, Safari or Firefox, a screen reader, the theme music an
 - Under the rank, one line gives the level and score, the player's best score at that level, and the score needed for the next rank. The best score for each level is saved on the player's device only.
 - The shortest game is now 25 questions. The 10 question choice was removed because a fleet cannot realistically be sunk in 10.
 - Tested in Chromium at phone size: six games at scores from 20% to 100% each showed the expected rank and best-score line, with no sideways scrolling and no script errors.
+
+## Update, November 15, 2026 (sound on phones)
+
+- When a game starts, the theme music now fades out over about three seconds and the game sounds (ocean, missiles, splashes, explosions) fade in over about four. Before, on phones the music stayed at full volume for a moment and then cut off, because phones ignore the volume setting on a music file.
+- On iPhones the game sounds were silent when the ring switch was set to silent, while the theme music still played. The game now asks the phone to treat its sound as media, and on older iPhones it keeps a silent sound file looping while a game is open, so the game sounds can be heard.
+- The sound buttons still turn everything off (1.4.2 Audio Control). Every sound still has a matching text announcement.
+- Tested in Chromium only: the music fades and stops, the game sound level rises, and the music returns at the menu, with no script errors. The test browser has no speakers and is not an iPhone, so this has not been heard on a real phone.
